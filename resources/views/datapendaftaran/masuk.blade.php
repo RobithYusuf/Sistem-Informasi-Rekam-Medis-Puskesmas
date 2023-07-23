@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>AdminLTE 3 | Starter</title>
+    <title>Data Pendaftaran</title>
 
     <script nonce="88fe3ff2-446a-4ff5-ad15-d1433dbb1d76">
         (function(w, d) {
