@@ -1,0 +1,99 @@
+.content-header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.content-header h1 {
+  font-family: 'Town', sans-serif;
+  margin: 0;
+}
+
+.content-header .breadcrumb {
+  float: right;
+  margin: 0;
+}
+
+/* Small Box */
+.small-box {
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.small-box .inner {
+  padding: 10px;
+}
+
+.small-box h3 {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.small-box p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.small-box .icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: rgba(0,0,0,0.15);
+  font-size: 50px;
+}
+
+.small-box a.small-box-footer {
+  display: block;
+  color: #777;
+  padding: 3px 0;
+  text-align: center;
+  font-size: 12px;
+  background: rgba(0,0,0,0.1);
+  text-decoration: none;
+}
+
+.small-box a.small-box-footer:hover {
+  background: rgba(0,0,0,0.15);
+  color: #fff;
+}
+
+/* Card Danger */
+.card.card-danger {
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.card.card-danger .card-header {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 10px;
+}
+
+.card.card-danger .card-header h3.card-title {
+  margin: 0;
+}
+
+.card.card-danger .card-tools .btn {
+  color: #fff;
+}
+
+/* Control Sidebar */
+.control-sidebar {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.control-sidebar .p-3 {
+  padding: 15px;
+}
+
+.control-sidebar h5 {
+  margin: 0 0 10px 0;
+}

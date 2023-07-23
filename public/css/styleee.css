@@ -1,0 +1,15 @@
+.content p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #333;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.content p::first-letter {
+  font-size: 32px;
+  font-weight: bold;
+  color: #dc3545;
+  float: left;
+  margin-right: 10px;
+}
