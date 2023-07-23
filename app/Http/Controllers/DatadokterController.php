@@ -7,6 +7,7 @@ use App\Models\datapoli;
 use App\Models\user;
 use Illuminate\Http\Request;
 use App\Http\Controllers\str;
+
 class DatadokterController extends Controller
 {
     /**
@@ -16,11 +17,9 @@ class DatadokterController extends Controller
      */
     public function index()
     {
-        $dtdokter = Modelsdatadokter::with('Datapoli','User')->paginate(5);
-        
+        $dtdokter = Modelsdatadokter::with('Datapoli', 'User')->paginate(5);
+
         return view('datadokter.masuk', compact('dtdokter'));
-        
-        
     }
 
     /**
@@ -28,24 +27,10 @@ class DatadokterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create( Request $request)
+    public function create()
     {
         $poli = datapoli::all();
-        $edtdokter = Modelsdatadokter::all();
-        
-        return view('datadokter.tambah', compact('poli','user'));
-
-        $user = user::all();   
-        $user = new user;
-        $user->role ='dokter';
-        $user->name = $request->nama;
-        $user->password = bcrypt('rahasia');
-        $user->save();
-
-        $edtdokter = new Modelsdatadokter($request->all());
-    $edtdokter->user_id = $user->id;
-    $edtdokter->save();
-        return redirect('datadokter-masuk')->with('toast_success', 'Data Berhasil Tersimpan!');
+        return view('datadokter.tambah', compact('poli'));
     }
 
     /**
@@ -56,17 +41,27 @@ class DatadokterController extends Controller
      */
     public function store(Request $request)
     {
-        Modelsdatadokter::create([
-            'id' => $request->id,
-            'nama' => $request->nama,
-            'datapoli_id' => $request->datapoli_id,
-            'telp' => $request->telp,
-            'tgl_lahir' => $request->tgl_lahir,
-            'alamat' => $request->alamat,
-          
-            
-        ]);
-        
+        $user = new user;
+        $user->role = 'dokter';
+
+        // Membuat username dari nama dokter
+        $name_parts = explode(" ", $request->nama);
+        $username = strtolower($name_parts[0]); // mengambil kata pertama dan merubah menjadi huruf kecil
+        $user->username = $username;
+
+        $user->name = $request->nama;
+
+        // Menggunakan tanggal lahir sebagai password
+        // Format tanggal lahir menjadi string dan gunakan sebagai password
+        $dateOfBirth = $request->tgl_lahir;
+        $password = date("mYd", strtotime($dateOfBirth)); // format menjadi "mmyyyydd"
+        $user->password = bcrypt($password);
+
+        $user->save();
+
+        $edtdokter = new Modelsdatadokter($request->all());
+        $edtdokter->user_id = $user->id;
+        $edtdokter->save();
         return redirect('datadokter-masuk')->with('toast_success', 'Data Berhasil Tersimpan!');
     }
 
@@ -91,7 +86,7 @@ class DatadokterController extends Controller
     {
         $poli = datapoli::all();
         $edtdokter = Modelsdatadokter::with('Datapoli')->findorfail($id);
-        return view('datadokter.edit', compact('edtdokter','poli'));
+        return view('datadokter.edit', compact('edtdokter', 'poli'));
     }
 
     /**

@@ -13,7 +13,7 @@ class datapendaftaran extends Model
     protected $table = "datapendaftaran";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'pelayanan', 'pasien_id', 'datapoli_id', 'riwayat_alergi', 'no_registrasi', 'status', 'no_bpjs'
+        'id', 'pelayanan', 'pasien_id', 'datapoli_id', 'riwayat_alergi', 'no_registrasi', 'status', 'no_bpjs', 'status_pendaftaran'
     ];
 
     public function pasien()
@@ -30,7 +30,13 @@ class datapendaftaran extends Model
     {
         return $this->hasOne(pemeriksaan::class);
     }
-    
+
+    public function dokter()
+    {
+        return $this->belongsTo(datadokter::class, 'datapoli_id', 'datapoli_id');
+    }
+
+
 
     public static function boot()
     {

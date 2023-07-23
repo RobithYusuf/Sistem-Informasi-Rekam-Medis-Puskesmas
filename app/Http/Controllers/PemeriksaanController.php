@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\datadokter;
+use App\Models\pemeriksaan;
+use Illuminate\Http\Request;
 use App\Models\pemeriksaan as ModelsPemeriksaan;
 use App\Models\datapendaftaran as ModelsDatapendaftaran;
-use Illuminate\Http\Request;
 
 class PemeriksaanController extends Controller
 {
@@ -14,9 +17,29 @@ class PemeriksaanController extends Controller
      */
     public function index()
     {
-        $dtpemeriksaan = Modelspemeriksaan::with('Pendaftaran')->paginate(5);
+        // Mendapatkan id user yang sedang login
+        $userId = auth()->user()->id;
+
+        // Mencari dokter dengan user_id yang sama
+        $dokter = Datadokter::where('user_id', $userId)->first();
+
+        // Jika dokter tidak ditemukan atau user yang login bukan dokter,
+        // kita bisa mengarahkan mereka ke halaman lain atau menampilkan pesan error
+        if (!$dokter) {
+            return redirect('home')->with('error', 'Anda tidak berhak mengakses halaman ini.');
+        }
+
+        // Mendapatkan id poliklinik dari dokter yang sedang login
+        $poliklinikId = $dokter->datapoli_id;
+
+        // Menampilkan pemeriksaan berdasarkan poliklinik dokter
+        $dtpemeriksaan = Modelspemeriksaan::whereHas('Pendaftaran', function ($query) use ($poliklinikId) {
+            $query->where('datapoli_id', $poliklinikId);
+        })->paginate(5);
+
         return view('pemeriksaan.masuk', compact('dtpemeriksaan'));
     }
+
 
     /**
      * Show the form for creating a new resource.

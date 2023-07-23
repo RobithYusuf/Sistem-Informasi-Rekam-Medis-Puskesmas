@@ -12,7 +12,7 @@ class datadokter extends Model
     protected $table = "datadokter";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'nama','datapoli_id','user_id', 'telp', 'tgl_lahir', 'alamat', 
+        'id', 'gelar_awal', 'nama', 'gelar_akhir', 'datapoli_id', 'user_id', 'telp', 'tgl_lahir', 'alamat',
     ];
 
     public function Datapoli()
@@ -25,6 +25,10 @@ class datadokter extends Model
         return $this->belongsTo(user::class);
     }
 
+    public function getNamaLengkapAttribute()
+    {
+        return $this->gelar_awal . ' ' . $this->nama . ' ' . $this->gelar_akhir;
+    }
 
     public static function boot()
     {
@@ -34,6 +38,4 @@ class datadokter extends Model
             $model::where('id', '>', $model->id)->decrement('id');
         });
     }
-
-    
 }

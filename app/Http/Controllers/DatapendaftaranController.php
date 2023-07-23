@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\datapendaftaran;
 use App\Models\datapendaftaran as ModelsDatapendaftaran;
 use App\Models\datapasien;
@@ -17,9 +18,8 @@ class DatapendaftaranController extends Controller
      */
     public function index()
     {
-        $dtpendaftaran = Modelsdatapendaftaran::with('pasien','poliklinik')->paginate(5);
+        $dtpendaftaran = Modelsdatapendaftaran::with('pasien', 'poliklinik')->paginate(5);
         return view('datapendaftaran.masuk', compact('dtpendaftaran'));
-        
     }
 
     /**
@@ -31,9 +31,7 @@ class DatapendaftaranController extends Controller
     {
         $dtpasien = datapasien::all();
         $dtpoli = datapoli::all();
-        return view('datapendaftaran.tambah', compact('dtpasien','dtpoli'));
-
-        
+        return view('datapendaftaran.tambah', compact('dtpasien', 'dtpoli'));
     }
 
     /**
@@ -53,13 +51,25 @@ class DatapendaftaranController extends Controller
             'riwayat_alergi' => $request->riwayat_alergi,
             'no_registrasi' => $request->no_registrasi,
             'status' => $request->status,
+            'status_pendaftaran' => $request->status_pendaftaran,
             'no_bpjs' => $request->no_bpjs,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
-    
-        // Buat data pemeriksaan terkait dan hubungkan dengan pendaftaran
-    
+
+        // Jika status pendaftaran adalah "berhasil", buat baris baru di tabel pemeriksaan
+        if ($request->status_pendaftaran == 'berhasil') {
+            $pemeriksaan = pemeriksaan::create([
+                'pendaftaran_id' => $pendaftaran->id,
+                'riwayat_alergi' => $pendaftaran->riwayat_alergi,
+                'status' => 'belum diperiksa',
+                'tgl_pemeriksaan' => now()
+            ]);
+        }
+
         return redirect('datapendaftaran-masuk')->with('toast_success', 'Data Berhasil Tersimpan!');
     }
+
 
     /**
      * Display the specified resource.
@@ -82,7 +92,7 @@ class DatapendaftaranController extends Controller
     {
         $dtpoli = datapoli::all();
         $edtpendaftaran = Modelsdatapendaftaran::findorfail($id);
-        return view('datapendaftaran.edit', compact('edtpendaftaran','dtpoli'));
+        return view('datapendaftaran.edit', compact('edtpendaftaran', 'dtpoli'));
     }
 
     /**
@@ -95,9 +105,28 @@ class DatapendaftaranController extends Controller
     public function update(Request $request, $id)
     {
         $edtpendaftaran = Modelsdatapendaftaran::findorfail($id);
+
+        // Simpan status pendaftaran sebelumnya
+        $status_pendaftaran_sebelumnya = $edtpendaftaran->status_pendaftaran;
+
+        // Lakukan update
         $edtpendaftaran->update($request->all());
+        $edtpendaftaran->updated_at = now();
+        $edtpendaftaran->save();
+
+        // Jika status pendaftaran berubah dari 'menunggu' menjadi 'berhasil'
+        if ($status_pendaftaran_sebelumnya == 'menunggu' && $request->status_pendaftaran == 'berhasil') {
+            $pemeriksaan = pemeriksaan::create([
+                'pendaftaran_id' => $edtpendaftaran->id,
+                'riwayat_alergi' => $edtpendaftaran->riwayat_alergi,
+                'status' => 'belum diperiksa',
+                'tgl_pemeriksaan' => now()
+            ]);
+        }
+
         return redirect('datapendaftaran-masuk')->with('toast_success', 'Data Berhasil Diupdate!');
     }
+
 
     /**
      * Remove the specified resource from storage.
