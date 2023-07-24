@@ -1,4 +1,3 @@
-
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
     <a href="index3.html" class="brand-link">
@@ -14,11 +13,9 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-                <a>Admin</a>
+                <a href="#" class="d-block">{{ Auth::user()->role }}</a>
             </div>
-
         </div>
-
 
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
@@ -33,7 +30,6 @@
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
 
                 <li class="nav-item">
                     <a href="{{ url ('home') }}" class="nav-link">
@@ -129,15 +125,13 @@
                 @endif
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ url ('rekammedis-masuk') }}" class="nav-link">
                         <i class="nav-icon fas fa-notes-medical"></i>
                         <p>
                             REKAM MEDIS
                         </p>
                     </a>
                 </li>
-
-
 
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DatadokterController;
+use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\DatapasienController;
 use App\Http\Controllers\DatapetugasController;
 use App\Http\Controllers\DatapoliController;
@@ -61,8 +62,14 @@ route::post('/simpanpemeriksaan', [pemeriksaanController::class, 'store'])->name
 route::get('/editpemeriksaan/{id}', [pemeriksaanController::class, 'edit'])->name('editpemeriksaan');
 route::post('/updatepemeriksaan/{id}', [pemeriksaanController::class, 'update'])->name('updatepemeriksaan');
 route::get('/deletepemeriksaan/{id}', [pemeriksaanController::class, 'destroy'])->name('deletepemeriksaan');
+
+route::get('/rekammedis-masuk', [RekamMedisController::class, 'index'])->name('rekammedis-masuk');
+Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])->name('search_and_print');
+
+
+
 // Route::middleware(['auth', 'level:admin,petugas,dokter'])->group(function () {
-//     Route::get('/home', [HomeController::class, 'index'])->name('home'); 
+//     Route::get('/home', [HomeController::class, 'index'])->name('home');
 // });
 
 // Route::group(['middleware' => ['auth', 'role:admin']], function () {
@@ -71,5 +78,5 @@ route::get('/deletepemeriksaan/{id}', [pemeriksaanController::class, 'destroy'])
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 route::get('/admin', [HomeController::class, 'index']);
 // Route::middleware(['auth'])->group(function () {
-//    Route::get('/admin', [LoginController::class, 'index']); 
+//    Route::get('/admin', [LoginController::class, 'index']);
 // });
