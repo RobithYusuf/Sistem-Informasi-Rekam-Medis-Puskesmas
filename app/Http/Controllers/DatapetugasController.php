@@ -37,16 +37,19 @@ class DatapetugasController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        Modelsdatapetugas::create([
-            'id' => $request->id,
-            'nama' => $request->nama,
-            'telp' => $request->telp,
-            'tgl_lahir' => $request->tgl_lahir,
-            'alamat' => $request->alamat,
+        $validated = $request->validate([
+            'id' => 'required|unique:datapetugas',
+            'nama' => 'required',
+            'telp' => 'required',
+            'tgl_lahir' => 'required|date',
+            'alamat' => 'required',
         ]);
+
+        ModelsDatapetugas::create($validated);
+
         return redirect('datapetugas-masuk')->with('toast_success', 'Data Berhasil Tersimpan!');
     }
+
 
     /**
      * Display the specified resource.

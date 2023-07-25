@@ -7,6 +7,7 @@ use App\Models\datapendaftaran as ModelsDatapendaftaran;
 use App\Models\datapasien;
 use App\Models\datapoli;
 use App\Models\pemeriksaan;
+use App\Models\rekammedis;
 use Illuminate\Http\Request;
 
 class DatapendaftaranController extends Controller
@@ -64,6 +65,12 @@ class DatapendaftaranController extends Controller
                 'riwayat_alergi' => $pendaftaran->riwayat_alergi,
                 'status' => 'belum diperiksa',
                 'tgl_pemeriksaan' => now()
+            ]);
+
+            // create a new record in rekam_medis
+            $rekamMedis = rekammedis::create([
+                'pemeriksaan_id' => $pemeriksaan->id,
+ 
             ]);
         }
 

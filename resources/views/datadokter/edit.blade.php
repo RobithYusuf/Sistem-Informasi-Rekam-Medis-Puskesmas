@@ -330,7 +330,7 @@
 
 
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="{{ url ('rekammedis-masuk') }}" class="nav-link">
                                                 <i class="nav-icon fa-solid fa-house-medical-flag"></i>
                                                 <p>
                                                     REKAM MEDIS

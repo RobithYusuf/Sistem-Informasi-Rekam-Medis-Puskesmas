@@ -11,13 +11,13 @@
 
   @include('Template.head')
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-<script nonce="88fe3ff2-446a-4ff5-ad15-d1433dbb1d76">(function(w,d){!function(bg,bh,bi,bj){bg[bi]=bg[bi]||{};bg[bi].executed=[];bg.zaraz={deferred:[],listeners:[]};bg.zaraz.q=[];bg.zaraz._f=function(bk){return function(){var bl=Array.prototype.slice.call(arguments);bg.zaraz.q.push({m:bk,a:bl})}};for(const bm of["track","set","debug"])bg.zaraz[bm]=bg.zaraz._f(bm);bg.zaraz.init=()=>{var bn=bh.getElementsByTagName(bj)[0],bo=bh.createElement(bj),bp=bh.getElementsByTagName("title")[0];bp&&(bg[bi].t=bh.getElementsByTagName("title")[0].text);bg[bi].x=Math.random();bg[bi].w=bg.screen.width;bg[bi].h=bg.screen.height;bg[bi].j=bg.innerHeight;bg[bi].e=bg.innerWidth;bg[bi].l=bg.location.href;bg[bi].r=bh.referrer;bg[bi].k=bg.screen.colorDepth;bg[bi].n=bh.characterSet;bg[bi].o=(new Date).getTimezoneOffset();if(bg.dataLayer)for(const bt of Object.entries(Object.entries(dataLayer).reduce(((bu,bv)=>({...bu[1],...bv[1]})))))zaraz.set(bt[0],bt[1],{scope:"page"});bg[bi].q=[];for(;bg.zaraz.q.length;){const bw=bg.zaraz.q.shift();bg[bi].q.push(bw)}bo.defer=!0;for(const bx of[localStorage,sessionStorage])Object.keys(bx||{}).filter((bz=>bz.startsWith("_zaraz_"))).forEach((by=>{try{bg[bi]["z_"+by.slice(7)]=JSON.parse(bx.getItem(by))}catch{bg[bi]["z_"+by.slice(7)]=bx.getItem(by)}}));bo.referrerPolicy="origin";bo.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(bg[bi])));bn.parentNode.insertBefore(bo,bn)};["complete","interactive"].includes(bh.readyState)?zaraz.init():bg.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 <script nonce="0c3fcacc-2dba-49f8-bc1a-7efd6b31210b">(function(w,d){!function(bg,bh,bi,bj){bg[bi]=bg[bi]||{};bg[bi].executed=[];bg.zaraz={deferred:[],listeners:[]};bg.zaraz.q=[];bg.zaraz._f=function(bk){return function(){var bl=Array.prototype.slice.call(arguments);bg.zaraz.q.push({m:bk,a:bl})}};for(const bm of["track","set","debug"])bg.zaraz[bm]=bg.zaraz._f(bm);bg.zaraz.init=()=>{var bn=bh.getElementsByTagName(bj)[0],bo=bh.createElement(bj),bp=bh.getElementsByTagName("title")[0];bp&&(bg[bi].t=bh.getElementsByTagName("title")[0].text);bg[bi].x=Math.random();bg[bi].w=bg.screen.width;bg[bi].h=bg.screen.height;bg[bi].j=bg.innerHeight;bg[bi].e=bg.innerWidth;bg[bi].l=bg.location.href;bg[bi].r=bh.referrer;bg[bi].k=bg.screen.colorDepth;bg[bi].n=bh.characterSet;bg[bi].o=(new Date).getTimezoneOffset();if(bg.dataLayer)for(const bt of Object.entries(Object.entries(dataLayer).reduce(((bu,bv)=>({...bu[1],...bv[1]})))))zaraz.set(bt[0],bt[1],{scope:"page"});bg[bi].q=[];for(;bg.zaraz.q.length;){const bw=bg.zaraz.q.shift();bg[bi].q.push(bw)}bo.defer=!0;for(const bx of[localStorage,sessionStorage])Object.keys(bx||{}).filter((bz=>bz.startsWith("_zaraz_"))).forEach((by=>{try{bg[bi]["z_"+by.slice(7)]=JSON.parse(bx.getItem(by))}catch{bg[bi]["z_"+by.slice(7)]=bx.getItem(by)}}));bo.referrerPolicy="origin";bo.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(bg[bi])));bn.parentNode.insertBefore(bo,bn)};["complete","interactive"].includes(bh.readyState)?zaraz.init():bg.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-       
+
   @include('Template.navbar')
 
   @include('Template.left-sidebar')
@@ -92,13 +92,13 @@ MASTER DATA
   <i class="far fa-circle nav-icon"></i>
   <p>Data Poliklinik</p>
   </a>
-  </li>    
+  </li>
 </ul>
 </li>
 
 
 <li class="nav-item">
-<a href="#" class="nav-link">
+<a href="{{ url ('rekammedis-masuk') }}" class="nav-link">
 <i class="nav-icon fa-solid fa-house-medical-flag"></i>
 <p>
 REKAM MEDIS
@@ -108,7 +108,7 @@ REKAM MEDIS
 
 <li class="nav-item">
     <a href="{{ route('logout') }}" class="nav-link">
-      
+
 <button type="button" class="btn btn-block btn-light btn-sm">LOGOUT</button>
     </a>
     </li>
@@ -188,37 +188,37 @@ REKAM MEDIS
       <div class="form-group">
       <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir"value="{{ $edtpasien->tgl_lahir }}">
       </div>
-      
+
       <div class="form-group">
       <input type="text" id="no_kartu" name="no_kartu" class="form-control" placeholder="Nomor Kartu"value="{{ $edtpasien->no_kartu }}">
       </div>
-      
+
       <div class="form-group">
-        <select class="form-select" name= "agama" aria-label="Default select example"> 
+        <select class="form-select" name= "agama" aria-label="Default select example">
           <option selected>Pilih Agama</option>
           <option value="Islam">Islam</option>
           <option value="Kristen Protestan">Kristen Protestan</option>
-          <option value="Kristen Katolik">Kristen Katolik</option>   
+          <option value="Kristen Katolik">Kristen Katolik</option>
           <option value="Hindu">Hindu</option>
           <option value="Buddha">Buddha</option>
-          <option value="Khonghucu">Khonghucu</option> 
+          <option value="Khonghucu">Khonghucu</option>
           </select>
       </div>
 
       <div class="form-group">
-        <select class="form-select" name= "hubungan" aria-label="Default select example"> 
+        <select class="form-select" name= "hubungan" aria-label="Default select example">
           <option selected>Pilih Hubungan Keluarga</option>
           <option value="suami">Suami</option>
           <option value="istri">Istri</option>
-          <option value="anak">Anak</option>   
+          <option value="anak">Anak</option>
           </select>
       </div>
 
       <div class="form-group">
-        <select class="form-select" name= "jenis_kelamin" aria-label="Default select example"> 
+        <select class="form-select" name= "jenis_kelamin" aria-label="Default select example">
           <option value="">Pilih Jenis Kelamin</option>
           <option value="laki-laki">Laki-Laki</option>
-          <option value="perempuan">Perempuan</option>  
+          <option value="perempuan">Perempuan</option>
           </select>
       </div>
 

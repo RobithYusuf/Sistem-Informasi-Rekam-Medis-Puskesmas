@@ -3,22 +3,25 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class level
+class Level
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param  \Closure  $next
+     * @param  string ...$roles
+     * @return mixed
      */
-    public function handle($request, Closure $next, ...$levels)
+    public function handle($request, Closure $next, ...$roles)
     {
-        if (in_array($request->user()->level, $levels)) {
-            return $next($request);
+        if (!Auth::check() || !in_array($request->user()->role, $roles)) {
+            // redirect ke halaman error atau halaman lainnya jika user tidak memiliki role yang diperlukan
+            return redirect('error');
         }
-        return redirect('/');
+
+        return $next($request);
     }
 }

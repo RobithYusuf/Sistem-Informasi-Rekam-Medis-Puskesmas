@@ -12,59 +12,70 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
-Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
 
+
+Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-route::get('/datapetugas-masuk', [DatapetugasController::class, 'index'])->name('datapetugas-masuk');
-route::get('/tambahpetugas', [DatapetugasController::class, 'create'])->name('tambahpetugas');
-route::post('/simpanpetugas', [DatapetugasController::class, 'store'])->name('simpanpetugas');
-route::get('/editpetugas/{id}', [DatapetugasController::class, 'edit'])->name('editpetugas');
-route::post('/updatepetugas/{id}', [DatapetugasController::class, 'update'])->name('updatepetugas');
-route::get('/deletepetugas/{id}', [DatapetugasController::class, 'destroy'])->name('deletepetugas');
 
-route::get('/datadokter-masuk', [DatadokterController::class, 'index'])->name('datadokter-masuk');
-route::get('/tambahdokter', [DatadokterController::class, 'create'])->name('tambahdokter');
-route::post('/simpandokter', [DatadokterController::class, 'store'])->name('simpandokter');
-route::get('/editdokter/{id}', [DatadokterController::class, 'edit'])->name('editdokter');
-route::post('/updatedokter/{id}', [DatadokterController::class, 'update'])->name('updatedokter');
-route::get('/deletedokter/{id}', [DatadokterController::class, 'destroy'])->name('deletedokter');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('level:admin,petugas,dokter,apotek');
+    Route::get('/admin', [HomeController::class, 'index'])->middleware('level:admin,petugas,dokter,apotek');
 
-route::get('/datapoli-masuk', [DatapoliController::class, 'index'])->name('datapoli-masuk');
-route::get('/tambahpoli', [DatapoliController::class, 'create'])->name('tambahpoli');
-route::post('/simpanpoli', [DatapoliController::class, 'store'])->name('simpanpoli');
-route::get('/editpoli/{id}', [DatapoliController::class, 'edit'])->name('editpoli');
-route::post('/updatepoli/{id}', [DatapoliController::class, 'update'])->name('updatepoli');
-route::get('/deletepoli/{id}', [DatapoliController::class, 'destroy'])->name('deletepoli');
+    route::get('/tambahpetugas', [DatapetugasController::class, 'create'])->name('tambahpetugas')->middleware('level:admin')->middleware('level:admin,petugas');
+    route::get('/datapetugas-masuk', [DatapetugasController::class, 'index'])->name('datapetugas-masuk')->middleware('level:admin,petugas');
+    route::post('/simpanpetugas', [DatapetugasController::class, 'store'])->name('simpanpetugas')->middleware('level:admin,petugas');
+    route::get('/editpetugas/{id}', [DatapetugasController::class, 'edit'])->name('editpetugas')->middleware('level:admin,petugas');
+    route::post('/updatepetugas/{id}', [DatapetugasController::class, 'update'])->name('updatepetugas')->middleware('level:admin,petugas');
+    route::get('/deletepetugas/{id}', [DatapetugasController::class, 'destroy'])->name('deletepetugas')->middleware('level:admin,petugas');
 
-route::get('/datapasien-masuk', [DatapasienController::class, 'index'])->name('datapasien-masuk');
-route::get('/tambahpasien', [DatapasienController::class, 'create'])->name('tambahpasien');
-route::post('/simpanpasien', [DatapasienController::class, 'store'])->name('simpanpasien');
-route::get('/editpasien/{id}', [DatapasienController::class, 'edit'])->name('editpasien');
-route::post('/updatepasien/{id}', [DatapasienController::class, 'update'])->name('updatepasien');
-route::get('/deletepasien/{id}', [DatapasienController::class, 'destroy'])->name('deletepasien');
+    route::get('/tambahdokter', [DatadokterController::class, 'create'])->name('tambahdokter')->middleware('level:admin,petugas');
+    route::get('/datadokter-masuk', [DatadokterController::class, 'index'])->name('datadokter-masuk')->middleware('level:admin,petugas');
+    route::post('/simpandokter', [DatadokterController::class, 'store'])->name('simpandokter')->middleware('level:admin,petugas');
+    route::get('/editdokter/{id}', [DatadokterController::class, 'edit'])->name('editdokter')->middleware('level:admin,petugas');
+    route::post('/updatedokter/{id}', [DatadokterController::class, 'update'])->name('updatedokter')->middleware('level:admin,petugas');
+    route::get('/deletedokter/{id}', [DatadokterController::class, 'destroy'])->name('deletedokter')->middleware('level:admin,petugas');
 
-route::get('/datapendaftaran-masuk', [DatapendaftaranController::class, 'index'])->name('datapendaftaran-masuk');
-route::get('/tambahpendaftaran', [DatapendaftaranController::class, 'create'])->name('tambahpendaftaran');
-route::post('/simpanpendaftaran', [DatapendaftaranController::class, 'store'])->name('simpanpendaftaran');
-route::get('/editpendaftaran/{id}', [DatapendaftaranController::class, 'edit'])->name('editpendaftaransien');
-route::post('/updatependaftaran/{id}', [DatapendaftaranController::class, 'update'])->name('updatependaftaran');
-route::get('/deletependaftaran/{id}', [DatapendaftaranController::class, 'destroy'])->name('deletependaftaran');
+    route::get('/tambahpoli', [DatapoliController::class, 'create'])->name('tambahpoli')->middleware('level:admin,petugas');
+    route::get('/datapoli-masuk', [DatapoliController::class, 'index'])->name('datapoli-masuk')->middleware('level:admin,petugas');
+    route::post('/simpanpoli', [DatapoliController::class, 'store'])->name('simpanpoli')->middleware('level:admin,petugas');
+    route::get('/editpoli/{id}', [DatapoliController::class, 'edit'])->name('editpoli')->middleware('level:admin,petugas');
+    route::post('/updatepoli/{id}', [DatapoliController::class, 'update'])->name('updatepoli')->middleware('level:admin,petugas');
+    route::get('/deletepoli/{id}', [DatapoliController::class, 'destroy'])->name('deletepoli')->middleware('level:admin,petugas');
 
-route::get('/datapemeriksaan-masuk', [pemeriksaanController::class, 'index'])->name('datapemeriksaan-masuk');
-route::get('/tambahpemeriksaan', [pemeriksaanController::class, 'create'])->name('tambahpemeriksaan');
-route::post('/simpanpemeriksaan', [pemeriksaanController::class, 'store'])->name('simpanpemeriksaan');
-route::get('/editpemeriksaan/{id}', [pemeriksaanController::class, 'edit'])->name('editpemeriksaan');
-route::post('/updatepemeriksaan/{id}', [pemeriksaanController::class, 'update'])->name('updatepemeriksaan');
-route::get('/deletepemeriksaan/{id}', [pemeriksaanController::class, 'destroy'])->name('deletepemeriksaan');
+    route::get('/tambahpasien', [DatapasienController::class, 'create'])->name('tambahpasien')->middleware('level:admin,petugas');
+    route::get('/datapasien-masuk', [DatapasienController::class, 'index'])->name('datapasien-masuk')->middleware('level:admin,petugas');
+    route::post('/simpanpasien', [DatapasienController::class, 'store'])->name('simpanpasien')->middleware('level:admin,petugas');
+    route::get('/editpasien/{id}', [DatapasienController::class, 'edit'])->name('editpasien')->middleware('level:admin,petugas');
+    route::post('/updatepasien/{id}', [DatapasienController::class, 'update'])->name('updatepasien')->middleware('level:admin,petugas');
+    route::get('/deletepasien/{id}', [DatapasienController::class, 'destroy'])->name('deletepasien')->middleware('level:admin,petugas');
 
-route::get('/rekammedis-masuk', [RekamMedisController::class, 'index'])->name('rekammedis-masuk');
-Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])->name('search_and_print');
+    route::get('/tambahpendaftaran', [DatapendaftaranController::class, 'create'])->name('tambahpendaftaran')->middleware('level:admin,petugas');
+    route::get('/datapendaftaran-masuk', [DatapendaftaranController::class, 'index'])->name('datapendaftaran-masuk')->middleware('level:admin,petugas');
+    route::post('/simpanpendaftaran', [DatapendaftaranController::class, 'store'])->name('simpanpendaftaran')->middleware('level:admin,petugas');
+    route::get('/editpendaftaran/{id}', [DatapendaftaranController::class, 'edit'])->name('editpendaftaransien')->middleware('level:admin,petugas');
+    route::post('/updatependaftaran/{id}', [DatapendaftaranController::class, 'update'])->name('updatependaftaran')->middleware('level:admin,petugas');
+    route::get('/deletependaftaran/{id}', [DatapendaftaranController::class, 'destroy'])->name('deletependaftaran')->middleware('level:admin,petugas');
+
+    route::get('/tambahpemeriksaan', [pemeriksaanController::class, 'create'])->name('tambahpemeriksaan')->middleware('level:admin,dokter, petugas');
+    route::get('/datapemeriksaan-masuk', [pemeriksaanController::class, 'index'])->name('datapemeriksaan-masuk')->middleware('level:admin,dokter, petugas');
+    route::post('/simpanpemeriksaan', [pemeriksaanController::class, 'store'])->name('simpanpemeriksaan')->middleware('level:admin,dokter, petugas');
+    route::get('/editpemeriksaan/{id}', [pemeriksaanController::class, 'edit'])->name('editpemeriksaan')->middleware('level:admin,dokter, petugas');
+    route::post('/updatepemeriksaan/{id}', [pemeriksaanController::class, 'update'])->name('updatepemeriksaan')->middleware('level:admin,dokter, petugas');
+    route::get('/deletepemeriksaan/{id}', [pemeriksaanController::class, 'destroy'])->name('deletepemeriksaan')->middleware('level:admin,dokter, petugas');
+
+    route::get('/rekammedis-masuk', [RekamMedisController::class, 'index'])->name('rekammedis-masuk')->middleware('level:admin,dokter, petugas');
+    Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])->name('search_and_print')->middleware('level:admin,petugas');
+});
 
 
 
@@ -75,8 +86,10 @@ Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])
 // Route::group(['middleware' => ['auth', 'role:admin']], function () {
 //     Route::get('/home', [HomeController::class, 'index'])->name('home');
 // });
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-route::get('/admin', [HomeController::class, 'index']);
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+// route::get('/admin', [HomeController::class, 'index']);
+
 // Route::middleware(['auth'])->group(function () {
 //    Route::get('/admin', [LoginController::class, 'index']);
 // });
