@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Intervention\Image\Facades\Image;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $currentMonth = Carbon::now()->month;
+
+        $visitCount = DB::table('datapendaftaran')
+            ->whereMonth('created_at', $currentMonth)
+            ->count();
+
+        $totalPatients = DB::table('datapasien')->count();
+        $totalRegistrations = DB::table('datapendaftaran')->count();
+
+        return view('home', compact('visitCount', 'totalPatients', 'totalRegistrations'));
     }
 }

@@ -121,8 +121,6 @@
                         <p>Resep Obat</p>
                     </a>
                 </li>
-                @endif
-
                 <li class="nav-item">
                     <a href="{{ url ('rekammedis-masuk') }}" class="nav-link">
                         <i class="nav-icon fas fa-notes-medical"></i>
@@ -131,6 +129,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
+
+
 
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link">
