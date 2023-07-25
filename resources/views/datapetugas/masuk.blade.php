@@ -4,13 +4,14 @@
 
 <head>
     <title>Data Petugas</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('LogoPuskesmas.jpeg') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         @include('Template.head')
-        <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
         </head>
 
         <body class="hold-transition sidebar-mini layout-fixed">

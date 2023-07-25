@@ -4,13 +4,15 @@
 
 <head>
     <title>Dashboard Puskesmas</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('LogoPuskesmas.jpeg') }}">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         @include('Template.head')
-        <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+ 
 
 
         <body class="hold-transition sidebar-mini layout-fixed">
@@ -57,8 +59,7 @@
                                                     <div class="icon">
                                                         <i class="ion ion-bag"></i>
                                                     </div>
-                                                    <a href="#" class="small-box-footer">More info <i
-                                                            class="fas fa-arrow-circle-right"></i></a>
+                                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
 
@@ -72,8 +73,7 @@
                                                     <div class="icon">
                                                         <i class="ion ion-stats-bars"></i>
                                                     </div>
-                                                    <a href="#" class="small-box-footer">More info <i
-                                                            class="fas fa-arrow-circle-right"></i></a>
+                                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
 
@@ -86,8 +86,7 @@
                                                     <div class="icon">
                                                         <i class="ion ion-person-add"></i>
                                                     </div>
-                                                    <a href="#" class="small-box-footer">More info <i
-                                                            class="fas fa-arrow-circle-right"></i></a>
+                                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,19 +97,16 @@
                                                     <div class="card-header">
                                                         <h3 class="card-title">Donut Chart</h3>
                                                         <div class="card-tools">
-                                                            <button type="button" class="btn btn-tool"
-                                                                data-card-widget="collapse">
+                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                                 <i class="fas fa-minus"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-tool"
-                                                                data-card-widget="remove">
+                                                            <button type="button" class="btn btn-tool" data-card-widget="remove">
                                                                 <i class="fas fa-times"></i>
                                                             </button>
                                                         </div>
                                                     </div>
                                                     <div class="card-body">
-                                                        <canvas id="donutChart"
-                                                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                                        <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>

@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
 
-    <title>PUSKESMAS | Log in (v2)</title>
-
+    <title>PUSKESMAS | LOG IN</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('LogoPuskesmas.jpeg') }}">
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('AdminLTE/plugins/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">

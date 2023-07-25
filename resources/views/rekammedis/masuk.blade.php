@@ -4,18 +4,6 @@
 <head>
     <title>Data Rekam Medis</title>
 
-    <link rel="stylesheet" href="{{ asset('font/css/all.min.css') }}">
-    <script type="text/javascript" charset="utf8" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -61,16 +49,22 @@
 
                             <div class="card-body">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#searchModal">
-                                    Print Rekam Medis Pasien
+                                <button type="button" class="btn btn-primary mb-3 float-right" data-toggle="modal" data-target="#searchModal">
+                                    <i class="fas fa-print"></i> Print Rekam Medis Pasien
                                 </button>
 
+
+
+                                <!-- Modal -->
                                 <!-- Modal -->
                                 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="searchModalLabel">Cari & Print Rekam Medis</h5>
+                                                <h5 class="modal-title" id="searchModalLabel">
+                                                    <i class="fas fa-search"></i> Cari & Print PDF Rekam Medis (RM)
+                                                </h5>
+
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -78,13 +72,15 @@
                                             <div class="modal-body">
                                                 <form id="searchForm" action="{{ route('search_and_print') }}" method="get">
                                                     <div class="form-group row">
-                                                        <label for="search" class="col-sm-2 col-form-label">Nomor</label>
+                                                        <label for="search" class="col-sm-2 col-form-label">Nomor RM</label>
                                                         <div class="col-sm-10 input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="basic-addon1">RM-</span>
                                                             </div>
-                                                            <input type="text" id="search" name="search" class="form-control" placeholder="Masukkan Nomor...">
-                                                            <small class="form-text text-muted">Masukan nomor RM- saja. contoh '01', '002', '0003' dst.</small>
+                                                            <input type="text" id="search" name="search" class="form-control form-control-lg" placeholder="Masukkan Nomor...">
+                                                        </div>
+                                                        <div class="col-sm-10 offset-sm-2">
+                                                            <small class="form-text text-muted">Masukan nomor RM- saja. contoh '<strong>01</strong>', '<strong>002</strong>', '<strong>003</strong>' dan seterusnya!</small>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -97,6 +93,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+
 
                                 <table class="table table-bordered table-striped" id="example1">
                                     <thead>
@@ -182,7 +180,15 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["copy", "excel"]
+                "buttons": [{
+                        extend: 'copy',
+                        text: 'Copy Tabel' // mengubah teks tombol Copy menjadi 'Copy Tabel'
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'Cetak Excel' // mengubah teks tombol Excel menjadi 'Cetak Excel'
+                    }
+                ]
             });
 
             table.buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
