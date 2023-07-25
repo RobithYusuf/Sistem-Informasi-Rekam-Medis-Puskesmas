@@ -129,12 +129,24 @@ class DatapendaftaranController extends Controller
                 'status' => 'belum diperiksa',
                 'tgl_pemeriksaan' => now()
             ]);
-            // create a new record in rekam_medis
+
             $rekamMedis = rekammedis::create([
                 'pemeriksaan_id' => $pemeriksaan->id,
-
             ]);
         }
+        if ($status_pendaftaran_sebelumnya == 'berhasil' && $request->status_pendaftaran == 'menunggu') {
+            // Get the related pemeriksaan record
+            $pemeriksaan = pemeriksaan::where('pendaftaran_id', $edtpendaftaran->id)->first();
+
+            if ($pemeriksaan) {
+                // Delete related rekam_medis
+                rekammedis::where('pemeriksaan_id', $pemeriksaan->id)->delete();
+
+                // Delete pemeriksaan
+                $pemeriksaan->delete();
+            }
+        }
+
 
         return redirect('datapendaftaran-masuk')->with('toast_success', 'Data Berhasil Diupdate!');
     }
