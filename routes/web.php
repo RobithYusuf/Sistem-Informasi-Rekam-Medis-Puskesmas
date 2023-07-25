@@ -20,8 +20,6 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-
-
 Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -73,11 +71,9 @@ Route::middleware('auth')->group(function () {
     route::post('/updatepemeriksaan/{id}', [pemeriksaanController::class, 'update'])->name('updatepemeriksaan')->middleware('level:admin,dokter, petugas');
     route::get('/deletepemeriksaan/{id}', [pemeriksaanController::class, 'destroy'])->name('deletepemeriksaan')->middleware('level:admin,dokter, petugas');
 
-    route::get('/rekammedis-masuk', [RekamMedisController::class, 'index'])->name('rekammedis-masuk')->middleware('level:admin,dokter, petugas');
-    Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])->name('search_and_print')->middleware('level:admin,petugas');
+    route::get('/rekammedis-masuk', [RekamMedisController::class, 'index'])->name('rekammedis-masuk')->middleware('level:admin,dokter, petugas,apotek');
+    Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])->name('search_and_print')->middleware('level:admin,petugas,apotek');
 });
-
-
 
 // Route::middleware(['auth', 'level:admin,petugas,dokter'])->group(function () {
 //     Route::get('/home', [HomeController::class, 'index'])->name('home');
