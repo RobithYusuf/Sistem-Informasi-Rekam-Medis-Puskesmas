@@ -272,7 +272,7 @@
                                                             <tr>
                                                                 <td>{{ $item->id }}</td>
                                                                 <td>{{ $item->Pendaftaran->pasien->nama_pasien }}</td>
-                                                                <td>{{ $item->riwayat_alergi }}</td>
+                                                                <td>{{ $item->Pendaftaran->riwayat_alergi }}</td>
                                                                 <td>{{ $item->Pendaftaran->poliklinik->nama_poli}}</td>
                                                                 <td>{{ $item->hasil_pemeriksaan }}</td>
                                                                 <td>{{ $item->diagnosis }}</td>

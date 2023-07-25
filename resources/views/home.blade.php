@@ -51,7 +51,7 @@
                                             <div class="col-md-4">
                                                 <div class="small-box bg-info">
                                                     <div class="inner">
-                                                        <h3>000</h3>
+                                                        <h3>{{ $visitCount }}</h3>
                                                         <p>Kunjungan / Bulan</p>
                                                     </div>
                                                     <div class="icon">
@@ -62,10 +62,11 @@
                                                 </div>
                                             </div>
 
+
                                             <div class="col-md-4">
                                                 <div class="small-box bg-success">
                                                     <div class="inner">
-                                                        <h3>000</h3>
+                                                        <h3>{{ $totalPatients }}</h3>
                                                         <p>Jumlah Pasien</p>
                                                     </div>
                                                     <div class="icon">

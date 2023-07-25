@@ -68,12 +68,14 @@ class RekammedisController extends Controller
                 'datapendaftaran.status',
                 DB::raw("IF(datapendaftaran.status = 'bpjs', datapendaftaran.no_bpjs, 'non bpjs') as no_bpjs"),
                 'pemeriksaan.diagnosis',
+                'pemeriksaan.tgl_pemeriksaan',
                 'datapendaftaran.riwayat_alergi',
                 'pemeriksaan.hasil_pemeriksaan'
             )
-            ->where('datapasien.nama_pasien', 'like', "%{$no_rm}%")
-            ->orWhere('datapasien.no_rm', 'like', "%{$no_rm}%")
-            ->get();
+            ->where('datapasien.no_rm', 'like', "%{$no_rm}%")
+            ->get()
+            ->sortBy('created_at');
+
 
         // If the request is AJAX, return the data as JSON
         if ($request->ajax()) {

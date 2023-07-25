@@ -116,6 +116,7 @@
                 <th>Diagnosis</th>
                 <th>Riwayat Alergi</th>
                 <th>Hasil Pemeriksaan</th>
+                <th>Tanggal Pemeriksaan</th>
             </tr>
         </thead>
         <tbody>
@@ -126,6 +127,7 @@
                 <td>{{ $row->diagnosis }}</td>
                 <td>{{ $row->riwayat_alergi }}</td>
                 <td>{{ $row->hasil_pemeriksaan }}</td>
+                <td>{{ $row->tgl_pemeriksaan}}</td>
             </tr>
             @endforeach
         </tbody>

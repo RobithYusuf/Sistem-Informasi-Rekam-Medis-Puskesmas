@@ -12,9 +12,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/', function () {
     return redirect('/login');
@@ -72,7 +69,9 @@ Route::middleware('auth')->group(function () {
     route::get('/deletepemeriksaan/{id}', [pemeriksaanController::class, 'destroy'])->name('deletepemeriksaan')->middleware('level:admin,dokter, petugas');
 
     route::get('/rekammedis-masuk', [RekamMedisController::class, 'index'])->name('rekammedis-masuk')->middleware('level:admin,dokter, petugas,apotek');
-    Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])->name('search_and_print')->middleware('level:admin,dokter,petugas,apotek');
+
+    Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])->name('search_and_print')->middleware('level:admin,dokter, petugas,apotek');
+
 });
 
 // Route::middleware(['auth', 'level:admin,petugas,dokter'])->group(function () {

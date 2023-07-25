@@ -70,7 +70,7 @@ class DatapendaftaranController extends Controller
             // create a new record in rekam_medis
             $rekamMedis = rekammedis::create([
                 'pemeriksaan_id' => $pemeriksaan->id,
- 
+
             ]);
         }
 
