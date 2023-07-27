@@ -9,8 +9,6 @@
     <div class="wrapper">
 
         @include('Template.head')
-        <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-
         <body class="hold-transition sidebar-mini layout-fixed">
             <div class="wrapper">
 
@@ -20,6 +18,7 @@
                         @include('Template.navbar')
 
                         @include('Template.left-sidebar')
+                        @include('Template.modaleditprofile')
 
                         <div class="content-wrapper">
 

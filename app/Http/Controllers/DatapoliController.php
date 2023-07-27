@@ -26,7 +26,14 @@ class DatapoliController extends Controller
      */
     public function create()
     {
-        return view('datapoli.tambah');
+        $usedIds = ModelsDatapoli::pluck('id')->all();
+        $newId = 1;
+
+        while (in_array($newId, $usedIds)) {
+            $newId++;
+        }
+
+        return view('datapoli.tambah', ['newId' => $newId]);
     }
 
     /**

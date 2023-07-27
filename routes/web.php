@@ -26,12 +26,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('level:admin,petugas,dokter,apotek');
     Route::get('/admin', [HomeController::class, 'index'])->middleware('level:admin,petugas,dokter,apotek');
 
-    route::get('/tambahpetugas', [DatapetugasController::class, 'create'])->name('tambahpetugas')->middleware('level:admin')->middleware('level:admin,petugas');
+    // route::get('/tambahpetugas', [DatapetugasController::class, 'create'])->name('tambahpetugas')->middleware('level:admin')->middleware('level:admin,petugas');
+    Route::get('/tambahpetugas', [DatapetugasController::class, 'showForm'])->name('tambahpetugas')->middleware('level:admin,petugas');
     route::get('/datapetugas-masuk', [DatapetugasController::class, 'index'])->name('datapetugas-masuk')->middleware('level:admin,petugas');
     route::post('/simpanpetugas', [DatapetugasController::class, 'store'])->name('simpanpetugas')->middleware('level:admin,petugas');
     route::get('/editpetugas/{id}', [DatapetugasController::class, 'edit'])->name('editpetugas')->middleware('level:admin,petugas');
     route::post('/updatepetugas/{id}', [DatapetugasController::class, 'update'])->name('updatepetugas')->middleware('level:admin,petugas');
     route::get('/deletepetugas/{id}', [DatapetugasController::class, 'destroy'])->name('deletepetugas')->middleware('level:admin,petugas');
+    Route::post('update_profile', [DatapetugasController::class, 'updateProfile'])->name('update_profile')->middleware('level:petugas');
 
     route::get('/tambahdokter', [DatadokterController::class, 'create'])->name('tambahdokter')->middleware('level:admin,petugas');
     route::get('/datadokter-masuk', [DatadokterController::class, 'index'])->name('datadokter-masuk')->middleware('level:admin,petugas');
@@ -71,7 +73,6 @@ Route::middleware('auth')->group(function () {
     route::get('/rekammedis-masuk', [RekamMedisController::class, 'index'])->name('rekammedis-masuk')->middleware('level:admin,dokter, petugas,apotek');
 
     Route::get('/search_and_print', [RekammedisController::class, 'searchAndPrint'])->name('search_and_print')->middleware('level:admin,dokter, petugas,apotek');
-
 });
 
 // Route::middleware(['auth', 'level:admin,petugas,dokter'])->group(function () {

@@ -53,9 +53,6 @@
                                     <i class="fas fa-print"></i> Print Rekam Medis Pasien
                                 </button>
 
-
-
-                                <!-- Modal -->
                                 <!-- Modal -->
                                 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg">

@@ -22,6 +22,7 @@
                         @include('Template.navbar')
 
                         @include('Template.left-sidebar')
+                        @include('Template.modaleditprofile')
 
                         <div class="content-wrapper">
 

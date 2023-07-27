@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\user;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class datapetugas extends Model
 {
@@ -13,9 +14,13 @@ class datapetugas extends Model
     protected $table = "datapetugas";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'nama', 'telp', 'tgl_lahir', 'alamat'
+        'id', 'user_id', 'nama', 'telp', 'tgl_lahir', 'alamat'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(user::class, 'user_id', 'id');
+    }
 
     public static function boot()
     {

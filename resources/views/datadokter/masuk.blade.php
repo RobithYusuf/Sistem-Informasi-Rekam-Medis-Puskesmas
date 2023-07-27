@@ -212,7 +212,8 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th style="width: 100px">ID</th>
-                                                                    <th style="width: 100px">Nama</th>
+                                                                    <th style="width: 100px">Foto</th>
+                                                                    <th style="width: 100px">Nama Dokter</th>
                                                                     <th style="width: 100px">Poliklinik</th>
                                                                     <th style="width: 100px">Ruangan</th>
                                                                     <th style="width: 100px">No. Telp</th>
@@ -220,10 +221,18 @@
                                                                     <th style="width: 100px">Alamat</th>
                                                                     <th style="width: 80px">Action</th>
                                                                 </tr>
-
+                                                            </thead>
+                                                            <tbody>
                                                                 @foreach ($dtdokter as $item)
                                                                 <tr>
                                                                     <td>{{ $item->id }}</td>
+                                                                    <td>
+                                                                        @if ($item->user->foto_profil && Storage::disk('public')->exists('FotoDokter/' . $item->user->foto_profil))
+                                                                        <img src="{{ asset('storage/FotoDokter/'. $item->user->foto_profil) }}" alt="Foto Profil" class="img-circle elevation-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                                                        @else
+                                                                        <img src="{{ asset('images/default_foto_profil.jpeg') }}" alt="Default Profil" class="img-circle elevation-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                                                        @endif
+                                                                    </td>
                                                                     <td class="nowrap">{{ $item->nama_lengkap }}</td>
                                                                     <td>{{ $item->Datapoli->nama_poli }}</td>
                                                                     <td>{{ $item->Datapoli->ruangan }}</td>
@@ -236,15 +245,10 @@
                                                                         <a href="{{ url('deletedokter', $item->id) }}"><i class="fa-solid fa-person-circle-minus" style="color: red"></i></a>
                                                                     </td>
                                                                 </tr>
-
                                                                 @endforeach
-
-
-                                                            </thead>
-                                                            <tbody>
-
                                                             </tbody>
                                                         </table>
+
                                                     </div>
                                                     <div class="card-footer ">
                                                         {{ $dtdokter->links() }}

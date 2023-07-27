@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\datapetugas;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -19,6 +20,11 @@ class User extends Authenticatable
     public function Dokter()
     {
         return $this->hasMany(datadokter::class);
+    }
+
+    public function petugas()
+    {
+        return $this->hasOne(datapetugas::class, 'user_id', 'id');
     }
     /**
      * The attributes that are mass assignable.

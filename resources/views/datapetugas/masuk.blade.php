@@ -80,6 +80,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th style="width: 100px">ID</th>
+                                                                <th style="width: 100px">Foto Profil</th>
                                                                 <th style="width: 100px">Nama</th>
                                                                 <th style="width: 100px">No. Telp</th>
                                                                 <th style="width: 100px">Tgl Lahir</th>
@@ -90,6 +91,13 @@
                                                             @foreach ($dtpetugas as $item)
                                                             <tr>
                                                                 <td>{{ $item->id }}</td>
+                                                                <td>
+                                                                        @if ($item->user->foto_profil && Storage::disk('public')->exists('FotoPetugas/' . $item->user->foto_profil))
+                                                                        <img src="{{ asset('storage/FotoPetugas/'. $item->user->foto_profil) }}" alt="Foto Profil" class="img-circle elevation-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                                                        @else
+                                                                        <img src="{{ asset('images/default_foto_profil.jpeg') }}" alt="Default Profil" class="img-circle elevation-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                                                        @endif
+                                                                    </td>
                                                                 <td>{{ $item->nama }}</td>
                                                                 <td>{{ $item->telp }}</td>
                                                                 <td>{{ $item->tgl_lahir }}</td>
