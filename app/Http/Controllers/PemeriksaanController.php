@@ -37,7 +37,7 @@ class PemeriksaanController extends Controller
             $query->where('datapoli_id', $poliklinikId);
         })->paginate(5);
 
-        return view('pemeriksaan.masuk', compact('dtpemeriksaan'));
+        return view('pemeriksaan.tabel_pemeriksaan', compact('dtpemeriksaan'));
     }
 
 

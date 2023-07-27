@@ -20,7 +20,7 @@ class DatapendaftaranController extends Controller
     public function index()
     {
         $dtpendaftaran = Modelsdatapendaftaran::with('pasien', 'poliklinik')->paginate(5);
-        return view('datapendaftaran.masuk', compact('dtpendaftaran'));
+        return view('datapendaftaran.tabel_pendaftaran', compact('dtpendaftaran'));
     }
 
     /**
@@ -98,9 +98,11 @@ class DatapendaftaranController extends Controller
     public function edit($id)
     {
         $dtpoli = datapoli::all();
+        $pasien = datapasien::all(); // ganti 'Pasien' dengan nama model pasien Anda
         $edtpendaftaran = Modelsdatapendaftaran::findorfail($id);
-        return view('datapendaftaran.edit', compact('edtpendaftaran', 'dtpoli'));
+        return view('datapendaftaran.edit', compact('edtpendaftaran', 'dtpoli', 'pasien'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -117,13 +119,25 @@ class DatapendaftaranController extends Controller
         $status_pendaftaran_sebelumnya = $edtpendaftaran->status_pendaftaran;
 
         // Lakukan update
-        $edtpendaftaran->update($request->all());
+        $edtpendaftaran->update([
+            'pelayanan' => $request->pelayanan,
+            'pasien_id' => $request->pasien_id,
+            'datapoli_id' => $request->datapoli_id,
+            'riwayat_alergi' => $request->riwayat_alergi,
+            'no_registrasi' => $request->no_registrasi,
+            'status' => $request->status,
+            'status_pendaftaran' => $request->status_pendaftaran,
+            'no_bpjs' => $request->no_bpjs,
+        ]);
+
+
         $edtpendaftaran->updated_at = now();
         $edtpendaftaran->save();
 
         // Jika status pendaftaran berubah dari 'menunggu' menjadi 'berhasil'
         if ($status_pendaftaran_sebelumnya == 'menunggu' && $request->status_pendaftaran == 'berhasil') {
             $pemeriksaan = pemeriksaan::create([
+           
                 'pendaftaran_id' => $edtpendaftaran->id,
                 'riwayat_alergi' => $edtpendaftaran->riwayat_alergi,
                 'status' => 'belum diperiksa',
@@ -146,8 +160,6 @@ class DatapendaftaranController extends Controller
                 $pemeriksaan->delete();
             }
         }
-
-
         return redirect('datapendaftaran-masuk')->with('toast_success', 'Data Berhasil Diupdate!');
     }
 

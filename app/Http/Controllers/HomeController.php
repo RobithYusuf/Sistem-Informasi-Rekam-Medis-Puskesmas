@@ -18,6 +18,6 @@ class HomeController extends Controller
         $totalPatients = DB::table('datapasien')->count();
         $totalRegistrations = DB::table('datapendaftaran')->count();
 
-        return view('home', compact('visitCount', 'totalPatients', 'totalRegistrations'));
+        return view('dashboard.dashboard', compact('visitCount', 'totalPatients', 'totalRegistrations'));
     }
 }

@@ -33,14 +33,15 @@ Route::middleware('auth')->group(function () {
     route::get('/editpetugas/{id}', [DatapetugasController::class, 'edit'])->name('editpetugas')->middleware('level:admin,petugas');
     route::post('/updatepetugas/{id}', [DatapetugasController::class, 'update'])->name('updatepetugas')->middleware('level:admin,petugas');
     route::get('/deletepetugas/{id}', [DatapetugasController::class, 'destroy'])->name('deletepetugas')->middleware('level:admin,petugas');
-    Route::post('update_profile', [DatapetugasController::class, 'updateProfile'])->name('update_profile')->middleware('level:petugas');
+    Route::post('update_profile', [DatapetugasController::class, 'updateProfile'])->name('update_profile')->middleware('level:admin,petugas');
 
-    route::get('/tambahdokter', [DatadokterController::class, 'create'])->name('tambahdokter')->middleware('level:admin,petugas');
-    route::get('/datadokter-masuk', [DatadokterController::class, 'index'])->name('datadokter-masuk')->middleware('level:admin,petugas');
-    route::post('/simpandokter', [DatadokterController::class, 'store'])->name('simpandokter')->middleware('level:admin,petugas');
-    route::get('/editdokter/{id}', [DatadokterController::class, 'edit'])->name('editdokter')->middleware('level:admin,petugas');
-    route::post('/updatedokter/{id}', [DatadokterController::class, 'update'])->name('updatedokter')->middleware('level:admin,petugas');
-    route::get('/deletedokter/{id}', [DatadokterController::class, 'destroy'])->name('deletedokter')->middleware('level:admin,petugas');
+    route::get('/tambahdokter', [DatadokterController::class, 'create'])->name('tambahdokter')->middleware('level:admin,dokter');
+    route::get('/datadokter-masuk', [DatadokterController::class, 'index'])->name('datadokter-masuk')->middleware('level:admin,dokter');
+    route::post('/simpandokter', [DatadokterController::class, 'store'])->name('simpandokter')->middleware('level:admin,dokter');
+    route::get('/editdokter/{id}', [DatadokterController::class, 'edit'])->name('editdokter')->middleware('level:admin,dokter');
+    route::post('/updatedokter/{id}', [DatadokterController::class, 'update'])->name('updatedokter')->middleware('level:admin,dokter');
+    route::get('/deletedokter/{id}', [DatadokterController::class, 'destroy'])->name('deletedokter')->middleware('level:admin,dokter');
+    Route::post('update_profile_dokter', [DatadokterController::class, 'update_profile_dokter'])->name('update_profile_dokter')->middleware('level:admin,dokter');
 
     route::get('/tambahpoli', [DatapoliController::class, 'create'])->name('tambahpoli')->middleware('level:admin,petugas');
     route::get('/datapoli-masuk', [DatapoliController::class, 'index'])->name('datapoli-masuk')->middleware('level:admin,petugas');

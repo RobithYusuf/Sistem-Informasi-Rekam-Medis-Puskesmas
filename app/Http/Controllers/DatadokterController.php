@@ -40,7 +40,6 @@ class DatadokterController extends Controller
         }
 
         return view('datadokter.tambah', compact('poli'), ['newId' => $newId]);
-        
     }
 
     /**
@@ -91,18 +90,25 @@ class DatadokterController extends Controller
         return redirect('datadokter-masuk')->with('toast_success', 'Data Berhasil Tersimpan!');
     }
 
-    public function updateProfile(Request $request)
+    public function update_profile_dokter(Request $request)
     {
         $user = Auth::user();
 
         $request->validate([
-            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
-            'password' => ['required', 'string', 'min:8'],
-            'foto_profil' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'], // Validasi file harus berupa gambar dan maksimal 2MB
+            'username' => ['nullable', 'string', 'max:255', 'unique:users,username,' . $user->id],
+            'new_password' => ['string', 'min:8', 'nullable'],
+            'foto_profil' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
         ]);
 
-        $user->username = $request->username;
-        $user->password = Hash::make($request->password);
+        // Jika pengguna memasukkan username baru, update username
+        if ($request->filled('username')) {
+            $user->username = $request->username;
+        }
+
+        // Jika pengguna memasukkan password baru, update password
+        if ($request->filled('new_password')) {
+            $user->password = Hash::make($request->new_password);
+        }
 
         // Menangani upload foto profil
         if ($request->hasFile('foto_profil')) {
@@ -110,16 +116,13 @@ class DatadokterController extends Controller
             $foto_profil_name = time() . '.' . $foto_profil->getClientOriginalExtension();
             $foto_profil->move(storage_path('app/public/FotoDokter'), $foto_profil_name);
 
-            // Menghapus foto profil lama jika bukan foto default
-            if ($user->foto_profil != 'default_foto_profil.jpeg' && file_exists(storage_path('app/public/FotoDokter/' . $user->foto_profil))) {
+            // Menghapus foto profil lama jika bukan foto default dan ada foto untuk dihapus
+            if ($user->foto_profil != 'default_foto_profil.jpeg' && $user->foto_profil && file_exists(storage_path('app/public/FotoDokter/' . $user->foto_profil))) {
                 unlink(storage_path('app/public/FotoDokter/' . $user->foto_profil));
             }
-
             $user->foto_profil = $foto_profil_name;
         }
-
         $user->save();
-
         return back()->with('success', 'Profil berhasil diperbarui.');
     }
 

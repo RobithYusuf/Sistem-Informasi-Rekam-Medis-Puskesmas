@@ -26,7 +26,7 @@
             </div>
         </div>
 
-
+        <!--
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -36,7 +36,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -59,6 +59,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ url ('datapetugas-masuk') }}" class="nav-link {{ request()->is('datapetugas-masuk') ? 'active' : '' }}">
+
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Petugas</p>
                             </a>
@@ -72,7 +73,6 @@
 
                         <li class="nav-item">
                             <a href="{{ url ('datapoli-masuk') }}" class="nav-link {{ request()->is('datapoli-masuk') ? 'active' : '' }}">
-
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Poliklinik</p>
                             </a>
@@ -86,7 +86,7 @@
                 <li class="nav-item {{ request()->is('editProfileModal') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('editProfileModal') ? 'active' : '' }}" data-toggle="modal" data-target="#editProfileModal">
                         <i class="nav-icon fas fa-user-edit"></i>
-                        <p>Edit Profil</p>
+                        <p>EDIT PROFIL</p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview {{ request()->is('datapasien-masuk', 'datapendaftaran-masuk', 'dataKIB-masuk') ? 'menu-open' : '' }}">
@@ -121,18 +121,27 @@
                 @endif
 
                 @if (auth()->user()->role == "dokter")
-                <li class="nav-item {{ request()->is('datapemeriksaan-masuk') ? 'menu-open' : '' }}">
-                    <a href="{{ url ('datapemeriksaan-masuk') }}" class="nav-link {{ request()->is('datapemeriksaan-masuk') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Pemeriksaan</p>
+                <li class="nav-item {{ request()->is('editProfileModal') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('editProfileModal') ? 'active' : '' }}" data-toggle="modal" data-target="#editProfileModal">
+                        <i class="nav-icon fas fa-user-edit"></i>
+                        <p>EDIT PROFIL</p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('reseptObat-masuk') ? 'menu-open' : '' }}">
+                <li class="nav-item {{ request()->is('datapemeriksaan-masuk') ? 'menu-open' : '' }}">
+                    <a href="{{ url ('datapemeriksaan-masuk') }}" class="nav-link {{ request()->is('datapemeriksaan-masuk') ? 'active' : '' }}">
+
+
+                        <i class="nav-icon fas fa fa-stethoscope"></i>
+                        <p>PEMERIKSAAN</p>
+                    </a>
+                </li>
+
+                <!-- <li class="nav-item {{ request()->is('reseptObat-masuk') ? 'menu-open' : '' }}">
                     <a href="{{ url ('reseptObat-masuk') }}" class="nav-link {{ request()->is('reseptObat-masuk') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Resep Obat</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item {{ request()->is('rekammedis-masuk') ? 'menu-open' : '' }}">
                     <a href="{{ url ('rekammedis-masuk') }}" class="nav-link {{ request()->is('rekammedis-masuk') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-notes-medical"></i>

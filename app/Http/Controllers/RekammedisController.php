@@ -41,7 +41,7 @@ class RekammedisController extends Controller
             datapoli dpol ON da.datapoli_id = dpol.id
     ");
 
-        return view('rekammedis.masuk', compact('dataRekammedis'));
+        return view('rekammedis.tabel_rekam', compact('dataRekammedis'));
     }
 
     public function searchAndPrint(Request $request)

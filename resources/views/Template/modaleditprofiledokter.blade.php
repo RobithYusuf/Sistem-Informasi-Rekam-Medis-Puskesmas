@@ -8,16 +8,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('update_profile') }}" method="POST" enctype="multipart/form-data">
-
+                <form action="{{ route('update_profile_dokter') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label for="foto_profil">Foto Profil Sekarang</label>
                             <br>
                             @if (Auth::user()->foto_profil)
-                            <img src="{{ asset('storage/FotoPetugas/'.Auth::user()->foto_profil) }}" alt="User Image" style="width: 100px; height: 100px; object-fit: cover; margin-left: 15px;">
+                            <img src="{{ asset('storage/FotoDokter/'.Auth::user()->foto_profil) }}" alt="User Image" style="width: 100px; height: 100px; object-fit: cover; margin-left: 15px;">
                             @else
                             <img src="{{ asset('images/default_foto_profil.jpeg') }}" alt="User Image" style="width: 100px; height: 100px; object-fit: cover;">
                             @endif
@@ -44,9 +42,6 @@
                         <input type="password" class="form-control" id="new_password" placeholder="Masukan Password Baru" name="new_password" autocomplete="new-password">
                         <small id="usernameHelp" class="form-text text-muted">Masukan Password baru jika ingin ubah!</small>
                     </div>
-
-
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

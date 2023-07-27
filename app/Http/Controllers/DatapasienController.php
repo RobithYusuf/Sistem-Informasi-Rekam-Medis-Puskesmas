@@ -16,7 +16,7 @@ class DatapasienController extends Controller
     public function index()
     {
         $dtpasien = Modelsdatapasien::paginate(5);
-        return view('datapasien.masuk', compact('dtpasien'));
+        return view('datapasien.tabel_pasien', compact('dtpasien'));
     }
 
     /**
