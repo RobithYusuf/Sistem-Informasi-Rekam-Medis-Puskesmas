@@ -4,8 +4,6 @@
 @section('judul_tabel','Tambah Data Pendaftaran')
 
 @section('content')
-
-
 <div class="content">
     <div class="container-fluid">
         <section class="content">
@@ -79,8 +77,6 @@
                 </div>
             </div>
         </section>
-
     </div>
 </div>
-
 @endsection

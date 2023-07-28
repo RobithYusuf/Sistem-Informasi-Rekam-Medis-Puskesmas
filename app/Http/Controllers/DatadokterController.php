@@ -21,7 +21,7 @@ class DatadokterController extends Controller
     {
         $dtdokter = Modelsdatadokter::with('Datapoli', 'User')->paginate(5);
 
-        return view('datadokter.masuk', compact('dtdokter'));
+        return view('datadokter.tabel_dokter', compact('dtdokter'));
     }
 
     /**

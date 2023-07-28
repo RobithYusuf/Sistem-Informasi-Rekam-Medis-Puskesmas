@@ -19,7 +19,7 @@ class DatapetugasController extends Controller
     public function index()
     {
         $dtpetugas = Modelsdatapetugas::paginate(5);
-        return view('datapetugas.masuk', compact('dtpetugas'));
+        return view('datapetugas.tabel_petugas', compact('dtpetugas'));
     }
 
     /**
