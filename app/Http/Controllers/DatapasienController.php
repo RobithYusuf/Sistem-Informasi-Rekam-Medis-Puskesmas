@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\datapasien as ModelsDatapasien;
-
+use DB;
 use Illuminate\Http\Request;
 
 class DatapasienController extends Controller
@@ -26,9 +26,11 @@ class DatapasienController extends Controller
      */
     public function create()
     {
-        return view('datapasien.tambah');
+        $last_pasien = ModelsDatapasien::orderBy('no_rm', 'desc')->first();
+        $next_rm_number = $last_pasien ? (int)substr($last_pasien->no_rm, 3) + 1 : 1;
+        $next_rm_number = "RM-" . sprintf('%03d', $next_rm_number);
+        return view('datapasien.tambah', compact('next_rm_number'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -37,6 +39,10 @@ class DatapasienController extends Controller
      */
     public function store(Request $request)
     {
+        $last_pasien = ModelsDatapasien::orderBy('no_rm', 'desc')->first();
+        $next_rm_number = $last_pasien ? (int)substr($last_pasien->no_rm, 3) + 1 : 1;
+        $next_rm_number = "RM-" . sprintf('%03d', $next_rm_number);
+
         Modelsdatapasien::create([
             'id' => $request->id,
             'nik_kk' => $request->nik_kk,
@@ -44,7 +50,7 @@ class DatapasienController extends Controller
             'nama_pasien' => $request->nama_pasien,
             'kode_kk' => $request->kode_kk,
             'nik' => $request->nik,
-            'no_rm' => $request->no_rm,
+            'no_rm' => $next_rm_number,
             'no_kartu' => $request->no_kartu,
             'alamat' => $request->alamat,
             'hubungan' => $request->hubungan,
@@ -54,6 +60,8 @@ class DatapasienController extends Controller
         ]);
         return redirect('datapasien-masuk')->with('toast_success', 'Data Berhasil Tersimpan!');
     }
+
+
 
     /**
      * Display the specified resource.

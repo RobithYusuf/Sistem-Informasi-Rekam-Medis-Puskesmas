@@ -45,12 +45,10 @@ class DatapendaftaranController extends Controller
     {
         // Simpan data pendaftaran
         $pendaftaran = Modelsdatapendaftaran::create([
-            'id' => $request->id,
             'pelayanan' => $request->pelayanan,
             'pasien_id' => $request->pasien_id,
             'datapoli_id' => $request->datapoli_id,
             'riwayat_alergi' => $request->riwayat_alergi,
-            'no_registrasi' => $request->no_registrasi,
             'status' => $request->status,
             'status_pendaftaran' => $request->status_pendaftaran,
             'no_bpjs' => $request->no_bpjs,
@@ -64,13 +62,16 @@ class DatapendaftaranController extends Controller
                 'pendaftaran_id' => $pendaftaran->id,
                 'riwayat_alergi' => $pendaftaran->riwayat_alergi,
                 'status' => 'belum diperiksa',
-                'tgl_pemeriksaan' => now()
+                'tgl_pemeriksaan' => now(),
+                'created_at' => now(),
+                'updated_at' => now()
             ]);
 
             // create a new record in rekam_medis
             $rekamMedis = rekammedis::create([
                 'pemeriksaan_id' => $pemeriksaan->id,
-
+                'created_at' => now(),
+                'updated_at' => now()
             ]);
         }
 
@@ -124,7 +125,6 @@ class DatapendaftaranController extends Controller
             'pasien_id' => $request->pasien_id,
             'datapoli_id' => $request->datapoli_id,
             'riwayat_alergi' => $request->riwayat_alergi,
-            'no_registrasi' => $request->no_registrasi,
             'status' => $request->status,
             'status_pendaftaran' => $request->status_pendaftaran,
             'no_bpjs' => $request->no_bpjs,
@@ -137,7 +137,7 @@ class DatapendaftaranController extends Controller
         // Jika status pendaftaran berubah dari 'menunggu' menjadi 'berhasil'
         if ($status_pendaftaran_sebelumnya == 'menunggu' && $request->status_pendaftaran == 'berhasil') {
             $pemeriksaan = pemeriksaan::create([
-           
+
                 'pendaftaran_id' => $edtpendaftaran->id,
                 'riwayat_alergi' => $edtpendaftaran->riwayat_alergi,
                 'status' => 'belum diperiksa',

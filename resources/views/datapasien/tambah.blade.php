@@ -4,6 +4,11 @@
 @section('judul_tabel','Tamabah Data Pasien')
 
 @section('content')
+<style>
+    .custom-input-group {
+        margin-left: -10px;
+    }
+</style>
 
 <div class="content">
     <div class="container-fluid">
@@ -41,13 +46,15 @@
                     <h3 class="card-title">DETAIL DATA PASIEN</h3>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="name1">ID:</label>
-                                <input type="text" id="id" name="id" class="form-control" placeholder="ID" required oninvalid="this.setCustomValidity('ID Pasien Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
-                            </div>
+                    <div class="col-md-12">
+                        <div class="form-group custom-input-group">
+                            <label for="name2">Nomor Rekam Medis (RM):</label>
+                            <input type="text" id="no_rm" name="no_rm" class="form-control" required value="{{ $next_rm_number }}" disabled>
                         </div>
+                    </div>
+
+
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name2">Kode KK:</label>
@@ -60,14 +67,18 @@
                                 <input type="text" id="nik" name="nik" class="form-control" placeholder="Masukkan NIK" required oninvalid="this.setCustomValidity('ID Pasien Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="name3">No RM:</label>
-                                <input type="text" id="no_rm" name="no_rm" class="form-control" placeholder="Masukkan Nomor RM" required oninvalid="this.setCustomValidity('ID Pasien Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
+                                <label for="name3">Nama Pasien :</label>
+                                <input type="text" id="nama_pasien" name="nama_pasien" class="form-control" placeholder="Masukkan Nama Pasien" required oninvalid="this.setCustomValidity('ID Pasien Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+
+
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name4">Alamat :</label>
@@ -80,20 +91,16 @@
                                 <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir" required oninvalid="this.setCustomValidity('Tanggal Lahir Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name6">No Kartu:</label>
                                 <input type="text" id="no_kartu" name="no_kartu" class="form-control" placeholder="Masukkan Nomor Kartu" required oninvalid="this.setCustomValidity('ID Pasien Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="name3">Nama Pasien :</label>
-                                <input type="text" id="nama_pasien" name="nama_pasien" class="form-control" placeholder="Masukkan Nama Pasien" required oninvalid="this.setCustomValidity('ID Pasien Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
-                            </div>
-                        </div>
+                    </div>
+                    <div class="row">
+
+
                     </div>
                     <div class="row">
                         <div class="col-md-4">

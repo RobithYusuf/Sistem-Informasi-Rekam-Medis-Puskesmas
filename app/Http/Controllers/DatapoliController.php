@@ -15,7 +15,7 @@ class DatapoliController extends Controller
     public function index()
     {
         $dtpoli = Modelsdatapoli::paginate(5);
-        return view('datapoli.masuk', compact('dtpoli'));
+        return view('datapoli.tabel_poliklinik', compact('dtpoli'));
     }
 
 

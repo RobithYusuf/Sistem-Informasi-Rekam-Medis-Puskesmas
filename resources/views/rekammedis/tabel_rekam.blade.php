@@ -10,7 +10,7 @@
         <section class="content">
 
             <div class="card">
-            <div class="card-header">
+                <div class="card-header">
                     <link rel="stylesheet" href="css/stylejudul.css">
                     <h3 class="card-title">Data Rekam Medis</h3>
                 </div>

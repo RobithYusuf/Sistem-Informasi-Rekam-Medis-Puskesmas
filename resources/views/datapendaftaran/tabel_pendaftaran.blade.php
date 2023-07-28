@@ -20,7 +20,8 @@
                             <link rel="stylesheet" href="css/style.css">
                             <thead>
                                 <tr>
-                                    <th style="width: 100px">ID</th>
+                                    <th style="width: 100px">No</th>
+
                                     <th style="width: 100px">Pelayanan</th>
                                     <th style="width: 100px">Nama Pasien</th>
                                     <th style="width: 100px">Poliklinik</th>
@@ -36,13 +37,13 @@
                             <tbody>
                                 @foreach ($dtpendaftaran as $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->pelayanan }}</td>
                                     <td>{{ $item->pasien->nama_pasien }}</td>
                                     <td>{{ $item->poliklinik->nama_poli }}</td>
                                     <td>{{ $item->pasien->jenis_kelamin }}</td>
                                     <td>{{ $item->riwayat_alergi }}</td>
-                                    <td>{{ $item->no_registrasi }}</td>
+                                    <td>{{ $item->id }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>{{ $item->no_bpjs }}</td>
                                     <td>{{ $item->status_pendaftaran }}</td>

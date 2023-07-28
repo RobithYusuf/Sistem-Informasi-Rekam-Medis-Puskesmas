@@ -23,5 +23,11 @@
         .nowrap {
             white-space: nowrap;
         }
+
+        .info a {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>

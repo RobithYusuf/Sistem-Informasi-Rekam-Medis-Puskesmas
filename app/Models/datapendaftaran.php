@@ -8,7 +8,8 @@ use PhpParser\Node\Expr\FuncCall;
 
 class datapendaftaran extends Model
 {
-    public $incrementing = false;
+
+    public $incrementing = true;
 
     protected $table = "datapendaftaran";
     protected $primaryKey = "id";
@@ -34,16 +35,5 @@ class datapendaftaran extends Model
     public function dokter()
     {
         return $this->belongsTo(datadokter::class, 'datapoli_id', 'datapoli_id');
-    }
-
-
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::deleted(function ($model) {
-            $model::where('id', '>', $model->id)->decrement('id');
-        });
     }
 }

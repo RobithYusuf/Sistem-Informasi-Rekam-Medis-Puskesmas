@@ -48,6 +48,7 @@
             </div>
         </aside>
     </div>
+    @include('Template.footer')
     @include('Template.script')
     @include('sweetalert::alert')
 </body>

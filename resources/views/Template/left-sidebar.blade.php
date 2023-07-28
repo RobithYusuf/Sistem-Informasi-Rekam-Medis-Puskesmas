@@ -4,24 +4,25 @@
         <span class="brand-text font-weight-light" style="font-size: 18px;">Puskesmas
             Parsoburan</span>
     </a>
-    @include('Template.head')
 
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                @if (Auth::user()->role == 'dokter')
-                <img src="{{ asset('storage/FotoDokter/'.Auth::user()->foto_profil) }}" class="img-circle elevation-2" alt="User Image" style="border-radius: 50%; width: 50px; height: 50px; object-fit: cover;">
-                @elseif (Auth::user()->role == 'petugas')
-                <img src="{{ asset('storage/FotoPetugas/'.Auth::user()->foto_profil) }}" class="img-circle elevation-2" alt="User Image" style="border-radius: 50%; width: 50px; height: 50px; object-fit: cover;">
+                @if (Auth::user()->role == 'dokter' && Auth::user()->foto_profil)
+                <img src="{{ asset('storage/FotoDokter/'.Auth::user()->foto_profil) }}" class="img-circle elevation-2" alt="No Foto" style="border-radius: 50%; width: 50px; height: 50px; object-fit: cover;">
+                @elseif (Auth::user()->role == 'petugas' && Auth::user()->foto_profil)
+                <img src="{{ asset('storage/FotoPetugas/'.Auth::user()->foto_profil) }}" class="img-circle elevation-2" alt="No Foto" style="border-radius: 50%; width: 50px; height: 50px; object-fit: cover;">
                 @else
-                <img src="{{ asset('images/default_foto_profil.jpeg') }}" class="img-circle elevation-2" alt="Tidak Aada" style="border-radius: 50%; width: 50px; height: 50px; object-fit: cover;">
+                <img src="{{ asset('images/default_foto_profil.jpeg') }}" class="img-circle elevation-2" alt="No Foto" style="border-radius: 50%; width: 50px; height: 50px; object-fit: cover;">
                 @endif
             </div>
 
+
             <div class="info pl-3" style="margin-top: -8px;">
                 @if(Auth::check())
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-                <a href="#" class="d-block">{{ Auth::user()->role }}</a>
+                <a href="#" class="d-block" title="{{ Auth::user()->name }}">{{ Auth::user()->name }}</a>
+                <a href="#" class="d-block">{{ ucfirst(Auth::user()->role) }}</a>
+
                 @endif
             </div>
         </div>

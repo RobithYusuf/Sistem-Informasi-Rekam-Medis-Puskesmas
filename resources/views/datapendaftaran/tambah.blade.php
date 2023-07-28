@@ -24,10 +24,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <input type="text" id="id" name="id" class="form-control" placeholder="ID Pendaftaran" required oninvalid="this.setCustomValidity('ID Pengguna Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
-                        </div>
-
+    
                         <div class="form-group">
                             <input type="text" id="pelayanan" name="pelayanan" class="form-control" placeholder="Pelayanan" required oninvalid="this.setCustomValidity('Nama Dokter Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                         </div>
@@ -43,10 +40,6 @@
 
                         <div class="form-group">
                             <input type="text" id="riwayat_alergi" name="riwayat_alergi" class="form-control" placeholder="Riwayat Alergi" required oninvalid="this.setCustomValidity('Nomor Telepon Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" id="no_registrasi" name="no_registrasi" class="form-control" placeholder="Nomor Registrasi" required oninvalid="this.setCustomValidity('Tanggal Lahir Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                         </div>
 
                         <div class="form-group">

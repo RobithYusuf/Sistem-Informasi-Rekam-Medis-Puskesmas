@@ -30,6 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($dtpemeriksaan->count() > 0)
                                 @foreach ($dtpemeriksaan as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
@@ -45,6 +46,11 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="9" class="text-center">Tidak ada data pemeriksaan</td>
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

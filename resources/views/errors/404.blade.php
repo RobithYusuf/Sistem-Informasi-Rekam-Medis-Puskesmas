@@ -32,8 +32,8 @@
             <h3><i class="fas fa-exclamation-triangle text-warning"></i> <strong> <strong>Oops! Halaman yang Anda cari tampaknya tidak ditemukan.</strong></strong></h3>
 
             <p>
-                Kami tidak dapat menemukan halaman yang Anda cari.
-                Sementara itu, Anda mungkin ke halalaman lain
+                Tidak dapat menemukan halaman yang Anda cari.
+                Sementara itu, Anda dapat ke halalaman lain.
             <p><a href="{{ url('/') }}" class="btn btn-primary w-100">kembali ke beranda</a>
             </p>
             </p>
