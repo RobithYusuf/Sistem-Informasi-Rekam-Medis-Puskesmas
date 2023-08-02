@@ -48,6 +48,7 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Ubah Data</button>
+                            <button type="button" class="btn btn-secondary" onclick="history.back()">Kembali</button>
                         </div>
 
                     </form>

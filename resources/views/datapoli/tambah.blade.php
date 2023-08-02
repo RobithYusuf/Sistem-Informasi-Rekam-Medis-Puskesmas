@@ -37,6 +37,7 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Simpan Data</button>
+                            <button type="button" class="btn btn-secondary" onclick="history.back()">Kembali</button>
                         </div>
 
                     </form>

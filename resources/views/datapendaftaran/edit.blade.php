@@ -76,11 +76,11 @@
                             <span class="small text-muted"> (Pendaftaran telah berhasil dan pasien dapat melanjutkan ke proses pemeriksaan)</span>
                         </div>
 
-
-
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Ubah Data</button>
+                            <button type="button" class="btn btn-secondary" onclick="history.back()">Kembali</button>
                         </div>
+
 
                     </form>
                 </div>

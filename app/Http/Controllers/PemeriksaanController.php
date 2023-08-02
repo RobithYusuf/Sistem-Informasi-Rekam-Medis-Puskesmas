@@ -26,7 +26,7 @@ class PemeriksaanController extends Controller
         // Jika dokter tidak ditemukan atau user yang login bukan dokter,
         // kita bisa mengarahkan mereka ke halaman lain atau menampilkan pesan error
         if (!$dokter) {
-            return redirect('home')->with('error', 'Anda tidak berhak mengakses halaman ini.');
+            return redirect('home')->with('error', 'Silahkan masuk sebagai Dokter, bukan admin dokter.');
         }
 
         // Mendapatkan id poliklinik dari dokter yang sedang login

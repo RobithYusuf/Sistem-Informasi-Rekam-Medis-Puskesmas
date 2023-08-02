@@ -62,7 +62,8 @@ Route::middleware('auth')->group(function () {
     route::post('/simpanpendaftaran', [DatapendaftaranController::class, 'store'])->name('simpanpendaftaran')->middleware('level:admin,petugas');
     route::get('/editpendaftaran/{id}', [DatapendaftaranController::class, 'edit'])->name('editpendaftaransien')->middleware('level:admin,petugas');
     route::post('/updatependaftaran/{id}', [DatapendaftaranController::class, 'update'])->name('updatependaftaran')->middleware('level:admin,petugas');
-    route::get('/deletependaftaran/{id}', [DatapendaftaranController::class, 'destroy'])->name('deletependaftaran')->middleware('level:admin,petugas');
+    Route::delete('/deletependaftaran/{id}', [DatapendaftaranController::class, 'destroy'])->name('deletependaftaran')->middleware('level:admin,petugas');
+
 
     route::get('/tambahpemeriksaan', [pemeriksaanController::class, 'create'])->name('tambahpemeriksaan')->middleware('level:admin,dokter, petugas');
     route::get('/datapemeriksaan-masuk', [pemeriksaanController::class, 'index'])->name('datapemeriksaan-masuk')->middleware('level:admin,dokter, petugas');
