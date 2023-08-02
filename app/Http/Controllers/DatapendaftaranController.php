@@ -19,7 +19,7 @@ class DatapendaftaranController extends Controller
      */
     public function index()
     {
-        $dtpendaftaran = Modelsdatapendaftaran::with('pasien', 'poliklinik')->paginate(5);
+        $dtpendaftaran = Modelsdatapendaftaran::with('pasien', 'poliklinik')->get();
         return view('datapendaftaran.tabel_pendaftaran', compact('dtpendaftaran'));
     }
 

@@ -119,8 +119,6 @@ class DatapetugasController extends Controller
     }
 
 
-
-
     public function showForm()
     {
         $usedIds = datapetugas::pluck('id')->all();
@@ -129,7 +127,6 @@ class DatapetugasController extends Controller
         while (in_array($newId, $usedIds)) {
             $newId++;
         }
-
         return view('datapetugas.tambah', ['newId' => $newId]);
     }
 
@@ -171,6 +168,8 @@ class DatapetugasController extends Controller
 
         // Mengambil data user
         $user = User::find($edtpetugas->user_id);
+        // Update nama pada tabel users
+        $user->name = $request->nama;
 
         // Menghandle perubahan foto profil
         if ($request->hasFile('foto_profil')) {

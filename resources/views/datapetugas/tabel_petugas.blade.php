@@ -1,5 +1,6 @@
 @extends('index_tabel')
 @section('judul','Petugas')
+@section('back_tabel','/datapetugas-masuk')
 @section('before_judul_tabel','Data Petugas')
 @section('judul_tabel','Tabel Petugas')
 @section('content')

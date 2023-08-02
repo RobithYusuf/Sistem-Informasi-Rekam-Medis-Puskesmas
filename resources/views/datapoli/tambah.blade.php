@@ -1,5 +1,6 @@
 @extends('index_tabel')
 @section('judul','Poliklinik')
+@section('back_tabel','/datapoli-masuk')
 @section('before_judul_tabel','Tabel Poliklinik')
 @section('judul_tabel','Tambah Data Poliklinik')
 
@@ -20,9 +21,9 @@
 
                         <div class="form-group">
                             <label for="id">ID Poliklinik:</label>
-                            <input type="text" id="id" name="id" class="form-control" placeholder="ID Poliklinik" required value="{{ $newId }}" readonly disabled>
-
+                            <input type="text" id="id" name="id" class="form-control" placeholder="ID Poliklinik" required value="{{ $newId }}" readonly>
                         </div>
+
 
                         <div class="form-group">
                             <label for="nama_poli">Nama Poliklinik:</label>

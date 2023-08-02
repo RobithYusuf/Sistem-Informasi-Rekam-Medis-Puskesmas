@@ -1,5 +1,6 @@
 @extends('index_tabel')
 @section('judul','Rekam Medis')
+@section('back_tabel','/rekammedis-masuk')
 @section('before_judul_tabel','Data Rekam Medis')
 @section('judul_tabel','Tabel Rekam Medis')
 

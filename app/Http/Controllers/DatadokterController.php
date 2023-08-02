@@ -164,6 +164,8 @@ class DatadokterController extends Controller
 
         // Mengambil data user
         $user = user::find($edtdokter->user_id);
+        // Update nama pada tabel users
+        $user->name = $request->nama;
 
         // Menghandle perubahan foto profil
         if ($request->hasFile('foto_profil')) {

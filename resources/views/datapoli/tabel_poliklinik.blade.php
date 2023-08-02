@@ -1,5 +1,6 @@
 @extends('index_tabel')
 @section('judul','Poliklinik')
+@section('back_tabel','/datapoli-masuk')
 @section('before_judul_tabel','Data Poliklinik')
 @section('judul_tabel','Tabel Poliklinik')
 @section('content')

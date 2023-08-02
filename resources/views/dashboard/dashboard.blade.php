@@ -1,5 +1,4 @@
 @extends('home')
-
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -16,7 +15,6 @@
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-
 
             <div class="col-md-4">
                 <div class="small-box bg-success">

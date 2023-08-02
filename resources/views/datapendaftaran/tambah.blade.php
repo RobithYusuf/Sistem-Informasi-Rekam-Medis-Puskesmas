@@ -1,5 +1,6 @@
 @extends('index_tabel')
 @section('judul','Pendaftaran')
+@section('back_tabel','/datapendaftaran-masuk')
 @section('before_judul_tabel','Tabel Pendaftaran')
 @section('judul_tabel','Tambah Data Pendaftaran')
 
@@ -24,7 +25,7 @@
                             </select>
                         </div>
 
-    
+
                         <div class="form-group">
                             <input type="text" id="pelayanan" name="pelayanan" class="form-control" placeholder="Pelayanan" required oninvalid="this.setCustomValidity('Nama Dokter Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                         </div>

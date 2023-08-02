@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class datapoli extends Model
 {
-    public $incrementing = false;
+    public $incrementing = true;
 
     protected $table = "datapoli";
     protected $primaryKey = "id";
     protected $fillable = [
         'id', 'nama_poli', 'ruangan'
     ];
-    
+
     public function Datadokter()
     {
         return $this->hasMany(datadokter::class, "datapoli_id");

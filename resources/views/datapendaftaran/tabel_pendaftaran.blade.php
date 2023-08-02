@@ -1,5 +1,6 @@
 @extends('index_tabel')
 @section('judul','Pendaftaran')
+@section('back_tabel','/datapendaftaran-masuk')
 @section('before_judul_tabel','Data Pendaftaran')
 @section('judul_tabel','Tabel Pendaftaran')
 @section('content')
@@ -7,16 +8,22 @@
     <div class="container-fluid">
         <section class="content">
             <div class="card">
+
                 <div class="card-header">
                     <h3 class="card-title">Data Pendaftaran</h3>
                     <div class="card-tools">
-                        <a href="{{ route('tambahpendaftaran') }}" class="btn btn-success">Tambah Data <i class="fas fa-plus-square"></i></a>
-                    </div>
+                    <a href="{{ route('tambahpendaftaran') }}" class="btn btn-success">Tambah Data <i class="fas fa-plus-square"></i></a>
+                    <select id="statusFilter" class="custom-select" style="width: auto;">
+                        <option value="">Semua Status</option>
+                        <option value="Menunggu">Menunggu</option>
+                        <option value="Berhasil">Berhasil</option>
+                    </select>
+                </div>
                 </div>
 
                 <div class="card-body">
                     <div class="table-responsive" style="overflow-x: auto;">
-                        <table class="table table-bordered responsive-table">
+                        <table class="table table-bordered responsive-table" id="example">
                             <link rel="stylesheet" href="css/style.css">
                             <thead>
                                 <tr>
@@ -57,12 +64,19 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer ">
-                    {{ $dtpendaftaran->links() }}
-                </div>
+              
             </div>
         </section>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        var table = $('#example').DataTable();
+
+        $('#statusFilter').change(function() {
+            table.column(9).search($(this).val()).draw();
+        });
+    });
+</script>
 
 @endsection

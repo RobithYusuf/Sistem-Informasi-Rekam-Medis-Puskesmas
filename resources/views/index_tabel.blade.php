@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">@yield('before_judul_tabel')</a></li>
+                                <li class="breadcrumb-item"><a href="@yield('back_tabel')">@yield('before_judul_tabel')</a></li>
                                 <li class="breadcrumb-item active">@yield('judul_tabel')</li>
                             </ol>
                         </div>

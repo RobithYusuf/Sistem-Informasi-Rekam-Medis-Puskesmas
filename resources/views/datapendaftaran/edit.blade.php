@@ -1,6 +1,6 @@
 @extends('index_tabel')
-
 @section('judul','Pendaftaran')
+@section('back_tabel','/datapendaftaran-masuk')
 @section('before_judul_tabel','Tabel Pendaftaran')
 @section('judul_tabel','Edit Data Pendaftaran')
 

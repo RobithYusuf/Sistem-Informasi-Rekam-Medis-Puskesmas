@@ -1,5 +1,6 @@
 @extends('index_tabel')
 @section('judul','Pemeriksaan')
+@section('back_tabel','/datapemeriksaan-masuk')
 @section('before_judul_tabel','Tabel Pemeriksaan')
 @section('judul_tabel','Tamabah Data Pemeriksaan')
 

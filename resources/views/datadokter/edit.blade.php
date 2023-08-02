@@ -1,6 +1,7 @@
 @extends('index_tabel')
 
 @section('judul','Dokter')
+@section('back_tabel','/datadokter-masuk')
 @section('before_judul_tabel','Tabel Dokter')
 @section('judul_tabel','Edit Data Dokter')
 
