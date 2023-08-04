@@ -28,7 +28,6 @@
                             <thead>
                                 <tr>
                                     <th style="width: 100px">No</th>
-
                                     <th style="width: 100px">Pelayanan</th>
                                     <th style="width: 100px">Nama Pasien</th>
                                     <th style="width: 100px">Poliklinik</th>
@@ -56,7 +55,6 @@
                                     <td>{{ $item->status_pendaftaran }}</td>
                                     <td>
                                         <a href="{{ url('editpendaftaran', $item->id) }}" class="btn btn-primary"> <i class="fa-solid fa-wand-magic-sparkles"></i></a>
-
                                         <button class="btn btn-danger delete-confirm" type="button" data-toggle="modal" data-target="#deleteModal" data-id="{{ $item->id }}" data-name="{{ $item->pasien->nama_pasien }}"><i class="fa-solid fa-person-circle-minus"></i></button>
 
                                     </td>
@@ -75,12 +73,9 @@
                                             <div class="modal-body">
                                                 Apakah anda yakin ingin menghapus data dari pasien <strong id="modal-name"></strong>?
                                             </div>
-
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
                                                 <form action="{{ url('deletependaftaran/{id}') }}" method="POST" id="deleteForm">
-
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="id" id="delete-id" value="">
@@ -111,21 +106,20 @@
             table.column(9).search($(this).val()).draw();
         });
 
-        // Tambahkan ini
-        $(document).ready(function() {
-            $('.delete-confirm').click(function() {
-                var id = $(this).data('id');
-                var name = $(this).data('name');
-                // Set the value of the hidden input field
-                $('#delete-id').val(id);
-                // Set the name in the modal
-                $('#modal-name').text(name);
-                // Set form action
-                var action = $('#deleteForm').attr('action').replace('{id}', id);
-                $('#deleteForm').attr('action', action);
-            });
+        // Ini di luar fungsi $(document).ready yang kedua
+        $('.delete-confirm').click(function() {
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            // Set the value of the hidden input field
+            $('#delete-id').val(id);
+            // Set the name in the modal
+            $('#modal-name').text(name);
+            // Set form action
+            var action = $('#deleteForm').attr('action').replace('{id}', id);
+            $('#deleteForm').attr('action', action);
         });
     });
 </script>
+
 
 @endsection

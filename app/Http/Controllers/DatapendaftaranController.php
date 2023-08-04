@@ -50,19 +50,23 @@ class DatapendaftaranController extends Controller
             'datapoli_id' => $request->datapoli_id,
             'riwayat_alergi' => $request->riwayat_alergi,
             'status' => $request->status,
-            'status_pendaftaran' => $request->status_pendaftaran,
             'no_bpjs' => $request->no_bpjs,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        // Jika status pendaftaran adalah "berhasil", buat baris baru di tabel pemeriksaan
-        if ($request->status_pendaftaran == 'berhasil') {
+        // Hitung berapa banyak pemeriksaan yang belum diperiksa untuk poli yang sama
+        $jumlah_belum_diperiksa = pemeriksaan::join('datapendaftaran', 'pemeriksaan.pendaftaran_id', '=', 'datapendaftaran.id')
+            ->where('pemeriksaan.status', 'belum diperiksa')
+            ->where('datapendaftaran.datapoli_id', $request->datapoli_id)
+            ->count();
+
+        // Jika jumlah pemeriksaan yang belum diperiksa untuk poli yang sama kurang dari 3, buat baris baru di tabel pemeriksaan
+        if ($jumlah_belum_diperiksa < 3) {
             $pemeriksaan = pemeriksaan::create([
                 'pendaftaran_id' => $pendaftaran->id,
                 'riwayat_alergi' => $pendaftaran->riwayat_alergi,
                 'status' => 'belum diperiksa',
-                'tgl_pemeriksaan' => now(),
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
@@ -73,6 +77,12 @@ class DatapendaftaranController extends Controller
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
+
+            // Set status pendaftaran menjadi "berhasil"
+            $pendaftaran->update(['status_pendaftaran' => 'berhasil']);
+        } else {
+            // Jika jumlah pemeriksaan yang belum diperiksa untuk poli yang sama >= 3, set status pendaftaran menjadi "menunggu"
+            $pendaftaran->update(['status_pendaftaran' => 'menunggu']);
         }
 
         return redirect('datapendaftaran-masuk')->with('toast_success', 'Data Berhasil Tersimpan!');
@@ -129,8 +139,6 @@ class DatapendaftaranController extends Controller
             'status_pendaftaran' => $request->status_pendaftaran,
             'no_bpjs' => $request->no_bpjs,
         ]);
-
-
         $edtpendaftaran->updated_at = now();
         $edtpendaftaran->save();
 
@@ -171,8 +179,22 @@ class DatapendaftaranController extends Controller
      */
     public function destroy($id)
     {
-        $edtpendaftaran = Modelsdatapendaftaran::findorfail($id);
-        $edtpendaftaran->delete();
-        return back()->with('info', 'Data Berhasil Dihapus!');
+        $pendaftaran = ModelsDatapendaftaran::findOrFail($id);
+
+        if ($pendaftaran->status == "berhasil") {
+            // Hapus semua pemeriksaan dan rekam medis yang berhubungan dengan pendaftaran ini
+            foreach ($pendaftaran->pemeriksaan as $pemeriksaan) {
+                // Hapus rekam medis yang berhubungan dengan pemeriksaan ini
+                foreach ($pemeriksaan->rekam_medis as $rekam_medis) {
+                    $rekam_medis->delete();
+                }
+
+                $pemeriksaan->delete();
+            }
+        }
+
+        $pendaftaran->delete();
+
+        return redirect('datapendaftaran-masuk')->with('toast_success', 'Data Berhasil Dihapus!');
     }
 }

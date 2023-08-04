@@ -27,7 +27,7 @@
 
 
                         <div class="form-group">
-                            <input type="text" id="pelayanan" name="pelayanan" class="form-control" placeholder="Pelayanan" required oninvalid="this.setCustomValidity('Nama Dokter Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
+                            <input type="text" id="pelayanan" name="pelayanan" class="form-control" placeholder="Pelayanan" required oninvalid="this.setCustomValidity('Nama Pelayanan Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                         </div>
 
                         <div class="form-group">
@@ -40,11 +40,11 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="text" id="riwayat_alergi" name="riwayat_alergi" class="form-control" placeholder="Riwayat Alergi" required oninvalid="this.setCustomValidity('Nomor Telepon Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
+                            <input type="text" id="riwayat_alergi" name="riwayat_alergi" class="form-control" placeholder="Riwayat Alergi" required oninvalid="this.setCustomValidity('Riwayat Alergi Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                         </div>
 
                         <div class="form-group">
-                            <select class="form-select" name="status" aria-label="Default select example">
+                            <select class="form-select" name="status" aria-label="Default select example" required oninvalid="this.setCustomValidity('Status Pasien Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">
                                 <option value="">Pilih Status Pasien</option>
                                 <option value="bpjs">BPJS</option>
                                 <option value="umum">UMUM</option>
@@ -54,16 +54,7 @@
                         <div class="form-group">
                             <textarea name="no_bpjs" id="no_bpjs" class="form-control" placeholder="Nomor BPJS" required oninvalid="this.setCustomValidity('Alamat Tidak Boleh Kosong')" oninput="this.setCustomValidity('')">Non BPJS</textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Status Pendaftaran:</label><br>
-                            <input type="radio" id="menunggu" name="status_pendaftaran" value="menunggu" checked>
-                            <label for="menunggu">Menunggu</label>
-                            <span class="small text-muted"> (Pendaftaran sedang diproses dan menunggu konfirmasi)</span>
-                            <br>
-                            <input type="radio" id="berhasil" name="status_pendaftaran" value="berhasil">
-                            <label for="berhasil">Berhasil</label>
-                            <span class="small text-muted"> (Pendaftaran telah berhasil dan pasien dapat melanjutkan ke proses pemeriksaan)</span>
-                        </div>
+
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Simpan Data</button>
                             <button type="button" class="btn btn-secondary" onclick="history.back()">Kembali</button>

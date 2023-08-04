@@ -104,8 +104,43 @@ class PemeriksaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $edtpemeriksaan = Modelspemeriksaan::findorfail($id);
-        $edtpemeriksaan->update($request->all());
+        $pemeriksaan = Modelspemeriksaan::findorfail($id);
+        $pemeriksaan->update($request->all());
+
+        // Jika pemeriksaan telah diperiksa
+        if ($pemeriksaan->status == 'sudah diperiksa') {
+            // Dapatkan ID pendaftaran dari pemeriksaan ini
+            $pendaftaran_id = $pemeriksaan->pendaftaran_id;
+
+            // Dapatkan ID poli dari pendaftaran ini
+            $poli_id = Modelsdatapendaftaran::find($pendaftaran_id)->datapoli_id;
+
+            // Hitung berapa banyak pemeriksaan yang belum diperiksa untuk poli yang sama
+            $jumlah_belum_diperiksa = Modelspemeriksaan::join('datapendaftaran', 'pemeriksaan.pendaftaran_id', '=', 'datapendaftaran.id')
+                ->where('pemeriksaan.status', 'belum diperiksa')
+                ->where('datapendaftaran.datapoli_id', $poli_id)
+                ->count();
+
+            // Ubah status pendaftaran yang menunggu jika jumlah pemeriksaan yang belum diperiksa kurang dari atau sama dengan 3
+            if ($jumlah_belum_diperiksa <= 3) {
+                // Dapatkan pendaftaran yang menunggu untuk poli yang sama
+                $pendaftaran_menunggu = Modelsdatapendaftaran::where('status_pendaftaran', 'menunggu')
+                    ->where('datapoli_id', $poli_id)
+                    ->first();
+
+                // Jika ada pendaftaran yang menunggu, ubah statusnya menjadi berhasil dan tambahkan ke tabel pemeriksaan
+                if ($pendaftaran_menunggu) {
+                    $pendaftaran_menunggu->update(['status_pendaftaran' => 'berhasil']);
+
+                    // Tambahkan pendaftaran ini ke tabel pemeriksaan
+                    $pemeriksaan_baru = new Modelspemeriksaan;
+                    $pemeriksaan_baru->pendaftaran_id = $pendaftaran_menunggu->id;
+                    $pemeriksaan_baru->status = 'belum diperiksa';
+                    $pemeriksaan_baru->save();
+                }
+            }
+        }
+
         return redirect('datapemeriksaan-masuk')->with('toast_success', 'Data Berhasil Diupdate!');
     }
 

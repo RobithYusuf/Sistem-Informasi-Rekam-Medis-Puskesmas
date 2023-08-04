@@ -25,6 +25,9 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('level:admin,petugas,dokter,apotek');
     Route::get('/admin', [HomeController::class, 'index'])->middleware('level:admin,petugas,dokter,apotek');
+    Route::get('/get-visit-data', [HomeController::class, 'getVisitData'])->middleware('level:admin,petugas,dokter,apotek');
+    Route::get('/get-gender-data', [HomeController::class, 'getGenderData'])->middleware('level:admin,petugas,dokter,apotek');
+
 
     // route::get('/tambahpetugas', [DatapetugasController::class, 'create'])->name('tambahpetugas')->middleware('level:admin')->middleware('level:admin,petugas');
     Route::get('/tambahpetugas', [DatapetugasController::class, 'showForm'])->name('tambahpetugas')->middleware('level:admin,petugas');

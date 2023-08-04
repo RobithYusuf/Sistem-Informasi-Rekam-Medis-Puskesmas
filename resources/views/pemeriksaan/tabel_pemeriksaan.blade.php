@@ -12,10 +12,18 @@
                 <div class="card-header">
                     <link rel="stylesheet" href="css/stylejudul.css">
                     <h3 class="card-title">Data PEMERIKSAAN</h3>
+                    <div class="card-tools">
+                        <select id="statusFilter" class="custom-select" style="width: auto;">
+                            <option value="">Filter Status Pemeriksaan</option>
+                            <option value="belum diperiksa">Belum Diperiksa</option>
+                            <option value="sudah diperiksa">Sudah Diperiksa</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="card-body">
+
                     <div class="table-responsive" style="overflow-x: auto;">
-                        <table class="table table-bordered responsive-table">
+                        <table class="table table-bordered responsive-table" id="example">
                             <link rel="stylesheet" href="css/style.css">
                             <thead>
                                 <tr>
@@ -63,4 +71,14 @@
         </section>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        var table = $('#example').DataTable();
+
+        $('#statusFilter').change(function() {
+            table.column(6).search($(this).val()).draw();
+        });
+    });
+</script>
 @endsection

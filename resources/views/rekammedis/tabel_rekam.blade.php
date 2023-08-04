@@ -73,7 +73,7 @@
                                 <th>Poliklinik</th>
                                 <th>Agama</th>
                                 <th>Alamat</th>
-                                <th>Status</th>
+                                <th>Status Pasien</th>
                                 <th>No BPJS</th>
                                 <th>Diagnosis</th>
                                 <th>Riwayat Alergi</th>
